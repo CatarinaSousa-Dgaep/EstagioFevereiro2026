@@ -3,595 +3,901 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guia de Estágio - Power BI</title>
+<title>Guia de Estágio Power BI</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
---bg:#F5F7FA;--bg2:#FFFFFF;--bg3:#EEF1F6;--bg4:#E2E6ED;
---text:#222B45;--text2:#5A6178;--text3:#8A90B8;
---primary:#4B6CB7;--primary2:#6C63FF;--primary3:#8F94FB;
---accent:#6C63FF;--accent2:#8F94FB;
---gradient:linear-gradient(135deg,#4B6CB7,#6C63FF);
---gradient2:linear-gradient(135deg,#6C63FF,#8F94FB);
---shadow:0 2px 12px rgba(75,108,183,0.08);
---shadow2:0 4px 24px rgba(75,108,183,0.12);
---radius:12px;--radius2:8px;
---sidebar-w:280px;
---transition:0.3s cubic-bezier(.4,0,.2,1);
+:root {
+  --bg: #F4F6FB;
+  --bg2: #FFFFFF;
+  --bg3: #EDF0F7;
+  --text: #23243A;
+  --text2: #555770;
+  --primary: #563D7C;
+  --primary-light: #7C5FAF;
+  --secondary: #0078D7;
+  --accent: #9B59B6;
+  --gradient: linear-gradient(135deg, #563D7C 0%, #0078D7 100%);
+  --gradient2: linear-gradient(135deg, #9B59B6 0%, #0078D7 100%);
+  --shadow: 0 2px 16px rgba(86,61,124,0.08);
+  --shadow2: 0 4px 24px rgba(86,61,124,0.13);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --sidebar-w: 260px;
+  --success: #27AE60;
+  --warning: #F39C12;
+  --danger: #E74C3C;
+  --info: #3498DB;
+  --border: #E0E3EB;
+  --transition: 0.28s cubic-bezier(.4,0,.2,1);
 }
-[data-theme="dark"]{
---bg:#121824;--bg2:#1A2235;--bg3:#222D42;--bg4:#2A3650;
---text:#E1E5F2;--text2:#A8B0C8;--text3:#6B7394;
---primary:#6C63FF;--primary2:#8F94FB;--primary3:#A5AAFC;
---accent:#8F94FB;--accent2:#A5AAFC;
---gradient:linear-gradient(135deg,#6C63FF,#8F94FB);
---gradient2:linear-gradient(135deg,#8F94FB,#A5AAFC);
---shadow:0 2px 12px rgba(0,0,0,0.3);
---shadow2:0 4px 24px rgba(0,0,0,0.4);
+[data-theme="dark"] {
+  --bg: #14151F;
+  --bg2: #1E1E2F;
+  --bg3: #262840;
+  --text: #E0E2EE;
+  --text2: #A0A3BA;
+  --border: #33354A;
+  --shadow: 0 2px 16px rgba(0,0,0,0.25);
+  --shadow2: 0 4px 24px rgba(0,0,0,0.35);
 }
-html{scroll-behavior:smooth}
-body{
-font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
-background:var(--bg);color:var(--text);
-transition:background var(--transition),color var(--transition);
-line-height:1.6;min-height:100vh;overflow-x:hidden;
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+  overflow-x: hidden;
 }
-a{color:var(--primary2);text-decoration:none;transition:color var(--transition)}
-a:hover{color:var(--accent2);text-decoration:underline}
-button{font-family:inherit;cursor:pointer;border:none;outline:none;transition:all var(--transition)}
-input,textarea,select{font-family:inherit;outline:none;border:2px solid var(--bg4);background:var(--bg);color:var(--text);border-radius:var(--radius2);padding:10px 14px;transition:all var(--transition);width:100%}
-input:focus,textarea:focus,select:focus{border-color:var(--primary2);box-shadow:0 0 0 3px rgba(108,99,255,0.15)}
-textarea{resize:vertical;min-height:100px}
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--primary);border-radius:3px}
-
-.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;opacity:0;pointer-events:none;transition:opacity var(--transition)}
-.overlay.active{opacity:1;pointer-events:all}
-
-.sidebar{
-position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;
-background:var(--bg2);border-right:1px solid var(--bg4);
-z-index:1000;display:flex;flex-direction:column;
-transition:transform var(--transition),background var(--transition);
-overflow-y:auto;
+a { color: var(--secondary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+/* Toast */
+#toast-container {
+  position: fixed; top: 24px; right: 24px; z-index: 10000;
+  display: flex; flex-direction: column; gap: 10px; pointer-events: none;
 }
-.sidebar-header{
-padding:24px 20px;background:var(--gradient);
-color:#fff;text-align:center;
+.toast {
+  pointer-events: auto;
+  background: var(--bg2);
+  color: var(--text);
+  border-left: 5px solid var(--primary);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow2);
+  padding: 14px 22px;
+  font-size: 0.97rem;
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity 0.35s, transform 0.35s;
+  max-width: 370px;
+  display: flex; align-items: center; gap: 10px;
 }
-.sidebar-header h2{font-size:1.15rem;font-weight:700;margin-bottom:2px}
-.sidebar-header small{opacity:0.85;font-size:0.8rem}
-.sidebar-nav{flex:1;padding:12px 0}
-.nav-item{
-display:flex;align-items:center;gap:12px;
-padding:12px 24px;color:var(--text2);font-size:0.95rem;
-cursor:pointer;transition:all var(--transition);border-left:3px solid transparent;
+.toast.show { opacity: 1; transform: translateX(0); }
+.toast.success { border-left-color: var(--success); }
+.toast.warning { border-left-color: var(--warning); }
+.toast.danger { border-left-color: var(--danger); }
+.toast.info { border-left-color: var(--info); }
+.toast-icon { font-size: 1.3rem; }
+/* Sidebar */
+.sidebar {
+  position: fixed; left: 0; top: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  z-index: 1000;
+  display: flex; flex-direction: column;
+  transition: transform var(--transition), background var(--transition);
+  overflow-y: auto;
 }
-.nav-item:hover{background:var(--bg3);color:var(--text)}
-.nav-item.active{background:var(--bg3);color:var(--primary2);border-left-color:var(--primary2);font-weight:600}
-.nav-item .nav-icon{font-size:1.2rem;width:24px;text-align:center}
-.sidebar-footer{padding:16px 20px;border-top:1px solid var(--bg4);font-size:0.75rem;color:var(--text3);text-align:center}
-
-.header{
-position:fixed;top:0;left:var(--sidebar-w);right:0;height:60px;
-background:var(--bg2);border-bottom:1px solid var(--bg4);
-display:flex;align-items:center;justify-content:space-between;
-padding:0 24px;z-index:900;
-transition:left var(--transition),background var(--transition);
+.sidebar-header {
+  padding: 28px 22px 12px;
+  display: flex; align-items: center; gap: 12px;
+  border-bottom: 1px solid var(--border);
 }
-.hamburger{display:none;background:none;font-size:1.5rem;color:var(--text);padding:8px}
-.header-title{font-size:1.1rem;font-weight:600;color:var(--text)}
-.header-actions{display:flex;align-items:center;gap:12px}
-.theme-toggle{
-width:52px;height:28px;border-radius:14px;
-background:var(--bg4);position:relative;cursor:pointer;
-transition:background var(--transition);
+.sidebar-logo {
+  width: 42px; height: 42px;
+  background: var(--gradient);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; color: #fff;
 }
-.theme-toggle::after{
-content:'';position:absolute;top:3px;left:3px;
-width:22px;height:22px;border-radius:50%;
-background:var(--primary2);transition:transform var(--transition);
+.sidebar-title {
+  font-size: 1.1rem; font-weight: 700; color: var(--text);
+  line-height: 1.2;
 }
-[data-theme="dark"] .theme-toggle::after{transform:translateX(24px)}
-.theme-toggle .toggle-icons{
-display:flex;justify-content:space-between;align-items:center;
-height:100%;padding:0 6px;font-size:0.75rem;
+.sidebar-title small { font-weight: 400; font-size: 0.78rem; color: var(--text2); display: block; }
+.sidebar-nav { flex: 1; padding: 12px 0; }
+.sidebar-nav-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 24px;
+  cursor: pointer;
+  color: var(--text2);
+  font-size: 0.98rem;
+  font-weight: 500;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 2px 8px 2px 0;
+  transition: background var(--transition), color var(--transition), transform 0.15s;
+  user-select: none;
 }
-
-.main{
-margin-left:var(--sidebar-w);margin-top:60px;
-padding:24px;min-height:calc(100vh - 60px);
-transition:margin-left var(--transition);
+.sidebar-nav-item:hover { background: var(--bg3); color: var(--text); }
+.sidebar-nav-item.active {
+  background: var(--gradient);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 2px 12px rgba(86,61,124,0.18);
 }
-.section{display:none;animation:fadeIn 0.4s ease}
-.section.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-
-.card{
-background:var(--bg2);border-radius:var(--radius);
-box-shadow:var(--shadow);padding:24px;
-transition:all var(--transition);
+.sidebar-nav-icon { font-size: 1.28rem; width: 28px; text-align: center; }
+.sidebar-footer {
+  padding: 16px 22px;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text2);
+  text-align: center;
 }
-.card:hover{box-shadow:var(--shadow2)}
-.card-gradient{background:var(--gradient);color:#fff}
-.card-gradient .card-label{color:rgba(255,255,255,0.8)}
-
-.grid{display:grid;gap:20px}
-.grid-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-.grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.grid-4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
-
-.btn{
-display:inline-flex;align-items:center;gap:8px;
-padding:10px 20px;border-radius:var(--radius2);
-font-size:0.9rem;font-weight:600;
-transition:all var(--transition);
+/* Hamburger */
+.hamburger {
+  display: none;
+  position: fixed; top: 14px; left: 14px; z-index: 1100;
+  background: var(--gradient);
+  color: #fff;
+  border: none; border-radius: 10px;
+  width: 44px; height: 44px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  align-items: center; justify-content: center;
+  transition: background var(--transition);
 }
-.btn-primary{background:var(--gradient);color:#fff}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:var(--shadow2)}
-.btn-secondary{background:var(--bg3);color:var(--text)}
-.btn-secondary:hover{background:var(--bg4)}
-.btn-danger{background:#E53E3E;color:#fff}
-.btn-danger:hover{background:#C53030}
-.btn-sm{padding:6px 14px;font-size:0.82rem}
-.btn-icon{padding:8px;border-radius:50%;width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center}
-
-.progress-ring{position:relative;display:inline-flex;align-items:center;justify-content:center}
-.progress-ring svg{transform:rotate(-90deg)}
-.progress-ring .progress-text{
-position:absolute;font-size:1.4rem;font-weight:700;color:var(--text);
+.overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 999;
 }
-
-.badge{
-display:inline-block;padding:3px 10px;border-radius:20px;
-font-size:0.75rem;font-weight:600;
+.overlay.show { display: block; }
+/* Main */
+.main {
+  margin-left: var(--sidebar-w);
+  min-height: 100vh;
+  padding: 36px 36px 60px;
+  transition: margin-left var(--transition);
 }
-.badge-easy{background:#C6F6D5;color:#22543D}
-.badge-medium{background:#FEFCBF;color:#744210}
-.badge-hard{background:#FED7D7;color:#822727}
-[data-theme="dark"] .badge-easy{background:#22543D;color:#C6F6D5}
-[data-theme="dark"] .badge-medium{background:#744210;color:#FEFCBF}
-[data-theme="dark"] .badge-hard{background:#822727;color:#FED7D7}
-
-.stars{display:inline-flex;gap:2px;cursor:pointer}
-.stars .star{font-size:1.4rem;color:var(--bg4);transition:color 0.2s}
-.stars .star.filled{color:#F6AD55}
-.stars .star:hover{color:#ED8936}
-
-.tag{
-display:inline-block;padding:2px 10px;border-radius:12px;
-font-size:0.75rem;background:var(--bg3);color:var(--text2);margin:2px;
+.main-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
 }
-
-.toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px}
-.toast{
-padding:14px 20px;border-radius:var(--radius2);
-color:#fff;font-size:0.9rem;font-weight:500;
-animation:slideInRight 0.3s ease,fadeOut 0.3s ease 2.7s;
-box-shadow:0 4px 12px rgba(0,0,0,0.2);
-display:flex;align-items:center;gap:10px;
+.main-header-title { font-size: 1.55rem; font-weight: 700; }
+.theme-toggle {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 7px 16px;
+  cursor: pointer;
+  font-size: 1.15rem;
+  display: flex; align-items: center; gap: 8px;
+  color: var(--text);
+  transition: background var(--transition);
 }
-.toast-success{background:#38A169}
-.toast-error{background:#E53E3E}
-.toast-info{background:#4B6CB7}
-@keyframes slideInRight{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
-@keyframes fadeOut{to{opacity:0;transform:translateX(100%)}}
-
-.dialog-overlay{
-position:fixed;top:0;left:0;width:100%;height:100%;
-background:rgba(0,0,0,0.6);z-index:9998;
-display:none;align-items:center;justify-content:center;
+.theme-toggle:hover { background: var(--primary-light); color: #fff; }
+/* Cards */
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
 }
-.dialog-overlay.active{display:flex}
-.dialog{
-background:var(--bg2);border-radius:var(--radius);
-padding:32px;max-width:420px;width:90%;
-box-shadow:var(--shadow2);text-align:center;
+.card {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px 20px;
+  transition: box-shadow var(--transition), transform 0.18s, background var(--transition);
+  position: relative;
+  overflow: hidden;
 }
-.dialog h3{margin-bottom:12px;font-size:1.2rem}
-.dialog p{margin-bottom:24px;color:var(--text2)}
-.dialog-actions{display:flex;gap:12px;justify-content:center}
-
-.empty-state{text-align:center;padding:48px 24px;color:var(--text3)}
-.empty-state .empty-icon{font-size:3rem;margin-bottom:12px}
-.empty-state p{font-size:1rem}
-
-.search-box{position:relative}
-.search-box input{padding-left:40px}
-.search-box .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text3)}
-
-.module-card{border-left:4px solid var(--primary2)}
-.module-card .module-header{display:flex;justify-content:space-between;align-items:flex-start;cursor:pointer;gap:12px}
-.module-card .module-header h3{flex:1;font-size:1.05rem}
-.module-card .module-body{max-height:0;overflow:hidden;transition:max-height 0.5s ease}
-.module-card.expanded .module-body{max-height:5000px}
-.module-card .module-content{padding-top:16px;color:var(--text2);font-size:0.92rem;line-height:1.8}
-.module-card .module-content h4{color:var(--text);margin:16px 0 8px;font-size:0.98rem}
-.module-card .module-content p{margin-bottom:8px}
-.module-card .module-content ul{padding-left:20px;margin-bottom:12px}
-.module-card .module-content li{margin-bottom:4px}
-
-.checkbox-custom{display:flex;align-items:center;gap:10px;cursor:pointer}
-.checkbox-custom input[type="checkbox"]{display:none}
-.checkbox-custom .checkmark{
-width:22px;height:22px;border:2px solid var(--bg4);border-radius:6px;
-display:flex;align-items:center;justify-content:center;
-transition:all 0.2s;flex-shrink:0;
+.card:hover { box-shadow: var(--shadow2); transform: translateY(-2px); }
+.card-icon { font-size: 2rem; margin-bottom: 8px; }
+.card-label { font-size: 0.88rem; color: var(--text2); margin-bottom: 2px; }
+.card-value { font-size: 1.65rem; font-weight: 700; color: var(--text); }
+.card-bar { height: 6px; border-radius: 3px; background: var(--bg3); margin-top: 10px; }
+.card-bar-inner {
+  height: 100%; border-radius: 3px;
+  background: var(--gradient);
+  transition: width 0.6s cubic-bezier(.4,0,.2,1);
 }
-.checkbox-custom input:checked+.checkmark{background:var(--primary2);border-color:var(--primary2);color:#fff}
-
-.progress-bar{height:8px;background:var(--bg4);border-radius:4px;overflow:hidden}
-.progress-bar .progress-fill{height:100%;background:var(--gradient);border-radius:4px;transition:width 0.5s ease}
-
-.mood-selector{display:flex;gap:8px}
-.mood-selector .mood-btn{
-font-size:1.6rem;padding:8px;border-radius:50%;
-background:var(--bg3);cursor:pointer;transition:all 0.2s;
-border:2px solid transparent;
+/* Progress Bar */
+.progress-section { margin-bottom: 28px; }
+.progress-bar-outer {
+  background: var(--bg3);
+  border-radius: 12px;
+  height: 22px;
+  overflow: hidden;
+  margin-top: 8px;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.06);
 }
-.mood-selector .mood-btn:hover,.mood-selector .mood-btn.selected{
-transform:scale(1.15);border-color:var(--primary2);background:var(--bg);
+.progress-bar-inner {
+  height: 100%;
+  background: var(--gradient2);
+  border-radius: 12px;
+  transition: width 0.7s cubic-bezier(.4,0,.2,1);
+  display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 10px; color: #fff; font-size: 0.82rem; font-weight: 700;
+  min-width: 32px;
 }
-
-.diary-card{border-left:4px solid var(--primary2);position:relative}
-.diary-card .diary-mood{font-size:1.5rem;position:absolute;top:16px;right:16px}
-.diary-card .diary-date{font-size:0.8rem;color:var(--text3)}
-.diary-card .diary-title{font-size:1.05rem;font-weight:600;margin:4px 0}
-.diary-card .diary-content{color:var(--text2);font-size:0.9rem;margin:8px 0;white-space:pre-wrap}
-.diary-card .diary-actions{display:flex;gap:8px;margin-top:12px}
-
-.competency-category{margin-bottom:32px}
-.competency-category h3{font-size:1.1rem;margin-bottom:16px;color:var(--primary2);display:flex;align-items:center;gap:8px}
-.competency-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--bg3);flex-wrap:wrap;gap:8px}
-.competency-item .comp-info{flex:1;min-width:200px}
-.competency-item .comp-name{font-weight:600;font-size:0.95rem}
-.competency-item .comp-desc{font-size:0.82rem;color:var(--text3)}
-
-.eval-criteria{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--bg3);flex-wrap:wrap;gap:8px}
-.eval-criteria .eval-label{font-weight:600;flex:1;min-width:200px}
-.eval-scale{display:flex;gap:4px}
-.eval-scale .scale-btn{
-width:36px;height:36px;border-radius:50%;
-background:var(--bg3);color:var(--text2);
-font-weight:700;font-size:0.85rem;
-display:flex;align-items:center;justify-content:center;
+/* Quick Actions */
+.quick-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+.quick-btn {
+  background: var(--gradient);
+  color: #fff;
+  border: none; border-radius: 50px;
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(86,61,124,0.12);
+  transition: transform 0.15s, box-shadow 0.2s;
 }
-.eval-scale .scale-btn.selected{background:var(--primary2);color:#fff}
-.eval-scale .scale-btn:hover{background:var(--primary);color:#fff}
-
-.resource-card{display:flex;flex-direction:column;gap:8px}
-.resource-card h4{font-size:0.98rem;display:flex;align-items:center;gap:8px}
-.resource-card p{font-size:0.85rem;color:var(--text2)}
-.resource-card .resource-link{font-size:0.82rem;word-break:break-all}
-
-.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;align-items:center}
-.filter-btn{
-padding:6px 14px;border-radius:20px;font-size:0.82rem;
-background:var(--bg3);color:var(--text2);font-weight:500;
+.quick-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow2); }
+/* Activity Feed */
+.activity-feed { margin-top: 10px; }
+.activity-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
 }
-.filter-btn.active{background:var(--primary2);color:#fff}
-
-.section-header{margin-bottom:24px}
-.section-header h2{font-size:1.5rem;font-weight:700;margin-bottom:4px}
-.section-header p{color:var(--text2);font-size:0.95rem}
-
-.stat-value{font-size:2rem;font-weight:700}
-.stat-label{font-size:0.82rem;color:var(--text3);margin-top:2px}
-.card-gradient .stat-label{color:rgba(255,255,255,0.8)}
-
-.footer{
-margin-left:var(--sidebar-w);padding:24px;text-align:center;
-color:var(--text3);font-size:0.8rem;border-top:1px solid var(--bg4);
-transition:margin-left var(--transition);
+.activity-item:last-child { border-bottom: none; }
+.activity-dot {
+  min-width: 10px; min-height: 10px;
+  border-radius: 50%;
+  margin-top: 6px;
 }
-
-.activity-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bg3)}
-.activity-item:last-child{border:none}
-.activity-icon{width:36px;height:36px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-.activity-text{font-size:0.88rem;flex:1}
-.activity-time{font-size:0.75rem;color:var(--text3);flex-shrink:0}
-
-.tab-bar{display:flex;gap:4px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px}
-.tab-btn{
-padding:8px 16px;border-radius:var(--radius2) var(--radius2) 0 0;
-font-size:0.85rem;font-weight:600;background:var(--bg3);color:var(--text2);white-space:nowrap;
+.activity-dot.green { background: var(--success); }
+.activity-dot.blue { background: var(--info); }
+.activity-dot.purple { background: var(--accent); }
+.activity-dot.orange { background: var(--warning); }
+.activity-time { color: var(--text2); font-size: 0.82rem; margin-top: 2px; }
+/* Section Title */
+.section-title {
+  font-size: 1.35rem; font-weight: 700; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 10px;
 }
-.tab-btn.active{background:var(--primary2);color:#fff}
-
-.loading-screen{
-position:fixed;top:0;left:0;width:100%;height:100%;
-background:var(--bg);z-index:99999;
-display:flex;flex-direction:column;align-items:center;justify-content:center;
-transition:opacity 0.5s;
+/* Modules */
+.module-card {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: box-shadow var(--transition), background var(--transition);
 }
-.loading-screen.hidden{opacity:0;pointer-events:none}
-.spinner{
-width:48px;height:48px;border:4px solid var(--bg4);
-border-top-color:var(--primary2);border-radius:50%;
-animation:spin 0.8s linear infinite;
+.module-card:hover { box-shadow: var(--shadow2); }
+.module-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 22px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
 }
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading-screen p{margin-top:16px;color:var(--text2);font-weight:500}
-
-@media print{
-.sidebar,.header,.hamburger,.overlay,.toast-container,.footer,.btn,.nav-item{display:none!important}
-.main{margin:0!important;padding:20px!important}
-.section{display:block!important;page-break-inside:avoid}
-body{background:#fff!important;color:#000!important}
-.card{box-shadow:none!important;border:1px solid #ddd!important}
+.module-header:hover { background: var(--bg3); }
+.module-num {
+  width: 38px; height: 38px;
+  background: var(--gradient);
+  color: #fff;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1.1rem;
+  flex-shrink: 0;
 }
-
-@media(max-width:768px){
-.sidebar{transform:translateX(-100%)}
-.sidebar.open{transform:translateX(0)}
-.header{left:0}
-.main{margin-left:0}
-.footer{margin-left:0}
-.hamburger{display:block}
-.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+.module-info { flex: 1; }
+.module-name { font-weight: 700; font-size: 1.05rem; }
+.module-meta { display: flex; gap: 14px; margin-top: 4px; flex-wrap: wrap; }
+.module-meta span { font-size: 0.82rem; color: var(--text2); }
+.module-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 50px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #fff;
+}
+.badge-beginner { background: var(--success); }
+.badge-intermediate { background: var(--warning); }
+.badge-advanced { background: var(--danger); }
+.module-check {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s;
+  font-size: 1rem;
+}
+.module-check.checked {
+  background: var(--success);
+  border-color: var(--success);
+  color: #fff;
+}
+.module-expand-icon { font-size: 1.2rem; color: var(--text2); transition: transform 0.25s; flex-shrink: 0; }
+.module-expand-icon.open { transform: rotate(180deg); }
+.module-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(.4,0,.2,1), padding 0.3s;
+  padding: 0 22px;
+  background: var(--bg3);
+  font-size: 0.96rem;
+  color: var(--text2);
+  line-height: 1.7;
+}
+.module-body.open { max-height: 800px; padding: 18px 22px; }
+.module-body h4 { color: var(--text); margin: 10px 0 4px; font-size: 1rem; }
+.module-body ul { margin: 4px 0 8px 18px; }
+.module-body li { margin-bottom: 3px; }
+/* Worksheets */
+.filter-bar {
+  display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; align-items: center;
+}
+.filter-bar select, .filter-bar input {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.filter-bar select:focus, .filter-bar input:focus { border-color: var(--primary); }
+.worksheet-card {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 22px;
+  margin-bottom: 12px;
+  display: flex; align-items: flex-start; gap: 14px;
+  transition: box-shadow var(--transition), background var(--transition);
+}
+.worksheet-card:hover { box-shadow: var(--shadow2); }
+.ws-check {
+  width: 24px; height: 24px; min-width: 24px;
+  border-radius: 6px;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  margin-top: 2px;
+  transition: background 0.2s, border-color 0.2s;
+  font-size: 0.95rem;
+}
+.ws-check.checked { background: var(--success); border-color: var(--success); color: #fff; }
+.ws-title { font-weight: 700; font-size: 1rem; }
+.ws-desc { color: var(--text2); font-size: 0.92rem; margin-top: 2px; }
+/* Logbook */
+.log-form {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.log-form .full { grid-column: 1 / -1; }
+.log-form label { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; display: block; color: var(--text2); }
+.log-form input, .log-form textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+.log-form input:focus, .log-form textarea:focus { border-color: var(--primary); }
+.log-form textarea { min-height: 60px; }
+.btn-primary {
+  background: var(--gradient);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 11px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(86,61,124,0.12);
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow2); }
+.log-total {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 22px;
+  margin-bottom: 18px;
+  display: flex; align-items: center; gap: 12px; font-size: 1.05rem;
+}
+.log-total strong { color: var(--primary); font-size: 1.3rem; }
+.log-entry {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 22px;
+  margin-bottom: 10px;
+  transition: background var(--transition);
+}
+.log-entry-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.log-entry-date { font-weight: 700; color: var(--primary); }
+.log-entry-hours { font-size: 0.88rem; color: var(--text2); }
+.btn-delete {
+  background: none; border: none; color: var(--danger); cursor: pointer; font-size: 1.15rem; padding: 4px; border-radius: 6px;
+  transition: background 0.15s;
+}
+.btn-delete:hover { background: rgba(231,76,60,0.1); }
+.log-entry p { margin-top: 6px; font-size: 0.93rem; color: var(--text2); }
+.log-entry p strong { color: var(--text); }
+/* Skills */
+.skill-row {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 18px;
+  background: var(--bg2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 22px;
+}
+.skill-label { width: 140px; font-weight: 600; font-size: 0.97rem; flex-shrink: 0; }
+.skill-slider { flex: 1; }
+.skill-slider input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 8px;
+  border-radius: 4px;
+  background: var(--bg3);
+  outline: none;
+  transition: background 0.2s;
+}
+.skill-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--gradient);
+  cursor: pointer;
+  box-shadow: 0 1px 6px rgba(86,61,124,0.2);
+}
+.skill-slider input[type="range"]::-moz-range-thumb {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--gradient);
+  cursor: pointer;
+  border: none;
+}
+.skill-value { width: 48px; text-align: right; font-weight: 700; font-size: 1.05rem; color: var(--primary); }
+.radar-container {
+  display: flex; justify-content: center; align-items: center;
+  margin: 30px 0 10px;
+}
+.radar-svg { max-width: 370px; width: 100%; }
+.radar-svg text { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+/* Assessment */
+.quiz-card {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 18px;
+}
+.quiz-q { font-weight: 700; font-size: 1.05rem; margin-bottom: 12px; }
+.quiz-option {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  font-size: 0.96rem;
+}
+.quiz-option:hover { border-color: var(--primary-light); background: var(--bg3); }
+.quiz-option.selected { border-color: var(--primary); background: rgba(86,61,124,0.08); }
+.quiz-option.correct { border-color: var(--success); background: rgba(39,174,96,0.10); }
+.quiz-option.wrong { border-color: var(--danger); background: rgba(231,76,60,0.08); }
+.quiz-radio {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s, background 0.2s;
+}
+.quiz-option.selected .quiz-radio { border-color: var(--primary); background: var(--primary); }
+.quiz-option.selected .quiz-radio::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+.quiz-result {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow2);
+  padding: 36px;
+  text-align: center;
+}
+.quiz-score { font-size: 3rem; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.quiz-msg { font-size: 1.1rem; margin: 10px 0 18px; color: var(--text2); }
+/* Resources */
+.resource-group { margin-bottom: 24px; }
+.resource-group-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.resource-card {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 20px;
+  margin-bottom: 10px;
+  transition: box-shadow var(--transition);
+}
+.resource-card:hover { box-shadow: var(--shadow2); }
+.resource-title { font-weight: 700; font-size: 1rem; }
+.resource-desc { font-size: 0.91rem; color: var(--text2); margin-top: 3px; }
+.resource-badge {
+  display: inline-block; padding: 2px 10px; border-radius: 50px;
+  font-size: 0.76rem; font-weight: 600; color: #fff; margin-top: 6px;
+}
+.rb-doc { background: var(--info); }
+.rb-yt { background: #E74C3C; }
+.rb-comm { background: var(--success); }
+.rb-book { background: var(--accent); }
+.rb-tool { background: var(--warning); }
+/* Settings */
+.settings-group {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+  margin-bottom: 18px;
+}
+.settings-group h3 { font-size: 1.05rem; margin-bottom: 12px; }
+.settings-row {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 12px; flex-wrap: wrap;
+}
+.settings-row label { font-weight: 600; font-size: 0.95rem; min-width: 120px; }
+.settings-row input[type="text"], .settings-row input[type="file"] {
+  padding: 9px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+  background: var(--bg); color: var(--text); font-size: 0.95rem; outline: none; flex: 1; min-width: 180px;
+  font-family: inherit;
+}
+.settings-row input:focus { border-color: var(--primary); }
+.btn-secondary {
+  background: var(--bg3); color: var(--text); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 9px 20px; font-size: 0.95rem; cursor: pointer;
+  font-weight: 600; transition: background 0.15s;
+}
+.btn-secondary:hover { background: var(--primary-light); color: #fff; border-color: var(--primary-light); }
+.btn-danger {
+  background: var(--danger); color: #fff; border: none;
+  border-radius: var(--radius-sm); padding: 10px 22px; font-size: 0.95rem; cursor: pointer;
+  font-weight: 600; transition: background 0.15s;
+}
+.btn-danger:hover { background: #C0392B; }
+/* Modal */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 9999;
+  align-items: center; justify-content: center;
+}
+.modal-overlay.show { display: flex; }
+.modal-box {
+  background: var(--bg2); border-radius: var(--radius); box-shadow: var(--shadow2);
+  padding: 32px; max-width: 420px; width: 92%; text-align: center;
+}
+.modal-box h3 { margin-bottom: 10px; font-size: 1.15rem; }
+.modal-box p { color: var(--text2); margin-bottom: 18px; font-size: 0.97rem; }
+.modal-btns { display: flex; gap: 12px; justify-content: center; }
+/* Section visibility */
+.section { display: none; animation: fadeIn 0.35s; }
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+/* Responsive */
+@media (max-width: 800px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .hamburger { display: flex; }
+  .main { margin-left: 0; padding: 70px 16px 40px; }
+  .cards-row { grid-template-columns: 1fr 1fr; }
+  .log-form { grid-template-columns: 1fr; }
+  .skill-row { flex-wrap: wrap; }
+  .skill-label { width: 100%; }
+}
+@media (max-width: 480px) {
+  .cards-row { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
-<div class="loading-screen" id="loadingScreen">
-<div class="spinner"></div>
-<p>A carregar o Guia de Estágio...</p>
-</div>
-
+<div id="toast-container"></div>
 <div class="overlay" id="overlay"></div>
-
+<button class="hamburger" id="hamburger">&#9776;</button>
 <aside class="sidebar" id="sidebar">
-<div class="sidebar-header">
-<h2>📊 Guia de Estágio</h2>
-<small>Power BI - 2024/2025</small>
-</div>
-<nav class="sidebar-nav" id="sidebarNav">
-<div class="nav-item active" data-section="dashboard"><span class="nav-icon">🏠</span>Dashboard</div>
-<div class="nav-item" data-section="modules"><span class="nav-icon">📚</span>Módulos</div>
-<div class="nav-item" data-section="worksheets"><span class="nav-icon">📝</span>Fichas de Trabalho</div>
-<div class="nav-item" data-section="diary"><span class="nav-icon">📖</span>Diário de Bordo</div>
-<div class="nav-item" data-section="competencies"><span class="nav-icon">⭐</span>Competências</div>
-<div class="nav-item" data-section="evaluation"><span class="nav-icon">📋</span>Avaliação Final</div>
-<div class="nav-item" data-section="resources"><span class="nav-icon">🔗</span>Recursos</div>
-<div class="nav-item" data-section="settings"><span class="nav-icon">⚙️</span>Definições</div>
-</nav>
-<div class="sidebar-footer">Guia de Estágio Power BI v2.0<br>© 2025</div>
+  <div class="sidebar-header">
+    <div class="sidebar-logo">&#9889;</div>
+    <div class="sidebar-title">Power BI<small>Guia de Estágio</small></div>
+  </div>
+  <nav class="sidebar-nav" id="sidebar-nav"></nav>
+  <div class="sidebar-footer">&copy; 2025 Guia de Estágio Power BI</div>
 </aside>
-
-<header class="header" id="header">
-<button class="hamburger" id="hamburger">☰</button>
-<span class="header-title" id="headerTitle">Dashboard</span>
-<div class="header-actions">
-<div class="theme-toggle" id="themeToggle" title="Alternar tema">
-<div class="toggle-icons"><span>☀️</span><span>🌙</span></div>
+<main class="main" id="main-content"></main>
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-box" id="modal-box"></div>
 </div>
-</div>
-</header>
-
-<main class="main" id="mainContent">
-
-<!-- DASHBOARD -->
-<div class="section active" id="sec-dashboard">
-<div class="section-header"><h2>Dashboard</h2><p>Visão geral do seu progresso no estágio</p></div>
-<div class="card card-gradient" style="margin-bottom:20px">
-<h3 id="welcomeMsg">Bem-vindo(a) ao Guia de Estágio!</h3>
-<p style="opacity:0.9;margin-top:4px">Acompanhe o seu progresso, registe as suas aprendizagens e desenvolva as suas competências em Power BI.</p>
-</div>
-<div class="grid grid-4" style="margin-bottom:20px">
-<div class="card" style="text-align:center">
-<div style="display:flex;justify-content:center;margin-bottom:8px">
-<div class="progress-ring" id="mainProgressRing"></div>
-</div>
-<div class="stat-label">Progresso Geral</div>
-</div>
-<div class="card" style="text-align:center">
-<div class="stat-value" id="statModules">0/8</div>
-<div class="stat-label">Módulos Completos</div>
-</div>
-<div class="card" style="text-align:center">
-<div class="stat-value" id="statDiary">0</div>
-<div class="stat-label">Entradas no Diário</div>
-</div>
-<div class="card" style="text-align:center">
-<div class="stat-value" id="statCompetencies">0</div>
-<div class="stat-label">Competências Avaliadas</div>
-</div>
-</div>
-<div class="grid grid-2" style="margin-bottom:20px">
-<div class="card">
-<h3 style="margin-bottom:16px;font-size:1rem">Acesso Rápido</h3>
-<div style="display:flex;flex-wrap:wrap;gap:8px">
-<button class="btn btn-primary btn-sm" onclick="navigateTo('modules')">📚 Módulos</button>
-<button class="btn btn-primary btn-sm" onclick="navigateTo('worksheets')">📝 Fichas</button>
-<button class="btn btn-primary btn-sm" onclick="navigateTo('diary')">📖 Diário</button>
-<button class="btn btn-primary btn-sm" onclick="navigateTo('competencies')">⭐ Competências</button>
-<button class="btn btn-primary btn-sm" onclick="navigateTo('evaluation')">📋 Avaliação</button>
-<button class="btn btn-primary btn-sm" onclick="navigateTo('resources')">🔗 Recursos</button>
-</div>
-</div>
-<div class="card">
-<h3 style="margin-bottom:16px;font-size:1rem">Atividade Recente</h3>
-<div id="recentActivity">
-<div class="empty-state"><p>Ainda não há atividade registada.</p></div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- MODULES -->
-<div class="section" id="sec-modules">
-<div class="section-header"><h2>Módulos de Aprendizagem</h2><p>Explore os módulos e acompanhe o seu progresso</p></div>
-<div style="margin-bottom:16px">
-<div class="progress-bar"><div class="progress-fill" id="modulesProgressBar" style="width:0%"></div></div>
-<p style="font-size:0.85rem;color:var(--text3);margin-top:6px"><span id="modulesProgressText">0 de 8 módulos completos</span></p>
-</div>
-<div id="modulesList" style="display:flex;flex-direction:column;gap:16px"></div>
-</div>
-
-<!-- WORKSHEETS -->
-<div class="section" id="sec-worksheets">
-<div class="section-header"><h2>Fichas de Trabalho</h2><p>Exercícios práticos para consolidar os conhecimentos</p></div>
-<div class="filter-bar" id="wsFilters">
-<button class="filter-btn active" data-filter="all">Todos</button>
-<button class="filter-btn" data-filter="easy">Fácil</button>
-<button class="filter-btn" data-filter="medium">Médio</button>
-<button class="filter-btn" data-filter="hard">Difícil</button>
-<button class="filter-btn" data-filter="done">Concluídos</button>
-<button class="filter-btn" data-filter="pending">Pendentes</button>
-</div>
-<div class="tab-bar" id="wsTabs"></div>
-<div id="worksheetContent"></div>
-</div>
-
-<!-- DIARY -->
-<div class="section" id="sec-diary">
-<div class="section-header"><h2>Diário de Bordo</h2><p>Registe as suas experiências e aprendizagens diárias</p></div>
-<div class="card" style="margin-bottom:20px">
-<h3 style="font-size:1rem;margin-bottom:16px">Nova Entrada</h3>
-<div style="display:flex;flex-direction:column;gap:12px">
-<div style="display:flex;gap:12px;flex-wrap:wrap">
-<div style="flex:1;min-width:150px"><label style="font-size:0.85rem;color:var(--text2);display:block;margin-bottom:4px">Data</label><input type="date" id="diaryDate"></div>
-<div style="flex:2;min-width:200px"><label style="font-size:0.85rem;color:var(--text2);display:block;margin-bottom:4px">Título</label><input type="text" id="diaryTitle" placeholder="Título da entrada..."></div>
-</div>
-<div><label style="font-size:0.85rem;color:var(--text2);display:block;margin-bottom:4px">Conteúdo</label><textarea id="diaryContent" placeholder="O que aprendeu hoje? Que desafios enfrentou?"></textarea></div>
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-<div>
-<label style="font-size:0.85rem;color:var(--text2);display:block;margin-bottom:4px">Como se sentiu?</label>
-<div class="mood-selector" id="moodSelector">
-<span class="mood-btn" data-mood="😊">😊</span>
-<span class="mood-btn" data-mood="😐">😐</span>
-<span class="mood-btn" data-mood="😤">😤</span>
-<span class="mood-btn" data-mood="🤔">🤔</span>
-<span class="mood-btn" data-mood="🎉">🎉</span>
-</div>
-</div>
-<div style="flex:1;min-width:200px"><label style="font-size:0.85rem;color:var(--text2);display:block;margin-bottom:4px">Tags (separadas por vírgula)</label><input type="text" id="diaryTags" placeholder="power query, dax, relatório..."></div>
-</div>
-<button class="btn btn-primary" onclick="saveDiaryEntry()">💾 Guardar Entrada</button>
-</div>
-</div>
-<div class="search-box" style="margin-bottom:16px">
-<span class="search-icon">🔍</span>
-<input type="text" id="diarySearch" placeholder="Pesquisar entradas..." oninput="renderDiary()">
-</div>
-<p style="font-size:0.85rem;color:var(--text3);margin-bottom:16px"><span id="diaryCount">0</span> entradas registadas</p>
-<div id="diaryList"></div>
-</div>
-
-<!-- COMPETENCIES -->
-<div class="section" id="sec-competencies">
-<div class="section-header"><h2>Competências</h2><p>Auto-avalie as suas competências desenvolvidas durante o estágio</p></div>
-<div class="card" style="margin-bottom:20px">
-<h3 style="font-size:1rem;margin-bottom:12px">Resumo de Competências</h3>
-<div class="grid grid-4" id="compSummary"></div>
-</div>
-<div id="competenciesList"></div>
-</div>
-
-<!-- EVALUATION -->
-<div class="section" id="sec-evaluation">
-<div class="section-header"><h2>Avaliação Final</h2><p>Reflita sobre o seu desempenho durante o estágio</p></div>
-<div class="card" style="margin-bottom:20px">
-<h3 style="font-size:1rem;margin-bottom:20px">Critérios de Avaliação</h3>
-<div id="evalCriteria"></div>
-</div>
-<div class="card" style="margin-bottom:20px">
-<h3 style="font-size:1rem;margin-bottom:16px">Reflexão Escrita</h3>
-<div style="display:flex;flex-direction:column;gap:16px">
-<div><label style="font-size:0.85rem;color:var(--text2);display:block;margin-bottom:4px">Pontos Fortes</label><textarea id="evalStrengths" placeholder="Quais foram os seus pontos fortes durante o estágio?" oninput="autoSaveEval()"></textarea></div>
-<div><label style="font-size:0.85rem;color:var(--text2);display:block;margin-bottom:4px">Áreas de Melhoria</label><textarea id="evalImprovements" placeholder="Em que áreas pode melhorar?" oninput="autoSaveEval()"></textarea></div>
-<div><label style="font-size:0.85rem;color:var(--text2);display:block;margin-bottom:4px">Objetivos Alcançados</label><textarea id="evalGoals" placeholder="Que objetivos conseguiu alcançar?" oninput="autoSaveEval()"></textarea></div>
-<div><label style="font-size:0.85rem;color:var(--text2);display:block;margin-bottom:4px">Objetivos Futuros</label><textarea id="evalFuture" placeholder="Quais são os seus objetivos futuros com Power BI?" oninput="autoSaveEval()"></textarea></div>
-</div>
-</div>
-<div class="card" style="margin-bottom:20px">
-<h3 style="font-size:1rem;margin-bottom:12px">Satisfação Geral</h3>
-<div style="text-align:center">
-<div class="stars" id="overallSatisfaction" style="font-size:2rem;justify-content:center">
-<span class="star" data-val="1">★</span><span class="star" data-val="2">★</span><span class="star" data-val="3">★</span><span class="star" data-val="4">★</span><span class="star" data-val="5">★</span>
-</div>
-<p style="font-size:0.85rem;color:var(--text3);margin-top:8px" id="satisfactionLabel">Clique para avaliar</p>
-</div>
-</div>
-<div style="display:flex;gap:12px;flex-wrap:wrap">
-<button class="btn btn-primary" onclick="saveEvaluation()">💾 Guardar Avaliação</button>
-<button class="btn btn-secondary" onclick="generateReport()">📄 Gerar Relatório</button>
-</div>
-<div id="evalReport" style="margin-top:20px;display:none"></div>
-</div>
-
-<!-- RESOURCES -->
-<div class="section" id="sec-resources">
-<div class="section-header"><h2>Recursos</h2><p>Materiais e ferramentas úteis para a sua aprendizagem</p></div>
-<div class="search-box" style="margin-bottom:20px">
-<span class="search-icon">🔍</span>
-<input type="text" id="resourceSearch" placeholder="Pesquisar recursos..." oninput="renderResources()">
-</div>
-<div class="filter-bar" id="resourceFilters" style="margin-bottom:20px"></div>
-<div id="resourcesList" class="grid grid-2"></div>
-</div>
-
-<!-- SETTINGS -->
-<div class="section" id="sec-settings">
-<div class="section-header"><h2>Definições</h2><p>Personalize a sua experiência</p></div>
-<div class="card" style="margin-bottom:20px">
-<h3 style="font-size:1rem;margin-bottom:16px">Perfil</h3>
-<div style="max-width:400px">
-<label style="font-size:0.85rem;color:var(--text2);display:block;margin-bottom:4px">Nome do Estagiário</label>
-<input type="text" id="settingsName" placeholder="O seu nome..." oninput="saveName()">
-</div>
-</div>
-<div class="card" style="margin-bottom:20px">
-<h3 style="font-size:1rem;margin-bottom:16px">Aparência</h3>
-<div style="display:flex;align-items:center;gap:12px">
-<span>☀️ Tema Claro</span>
-<div class="theme-toggle" id="themeToggle2"><div class="toggle-icons"><span>☀️</span><span>🌙</span></div></div>
-<span>🌙 Tema Escuro</span>
-</div>
-</div>
-<div class="card" style="margin-bottom:20px">
-<h3 style="font-size:1rem;margin-bottom:16px">Dados</h3>
-<div style="display:flex;flex-wrap:wrap;gap:12px">
-<button class="btn btn-primary" onclick="exportData()">📤 Exportar Dados (JSON)</button>
-<label class="btn btn-secondary" style="cursor:pointer">📥 Importar Dados<input type="file" accept=".json" style="display:none" onchange="importData(event)"></label>
-<button class="btn btn-danger" onclick="confirmReset()">🗑️ Repor Dados</button>
-</div>
-</div>
-<div class="card">
-<h3 style="font-size:1rem;margin-bottom:8px">Sobre</h3>
-<p style="color:var(--text2);font-size:0.9rem">Guia de Estágio - Power BI v2.0</p>
-<p style="color:var(--text3);font-size:0.82rem;margin-top:4px">Aplicação desenvolvida para acompanhamento de estágio curricular na área de Power BI. Todos os dados são armazenados localmente no seu navegador.</p>
-<p style="color:var(--text3);font-size:0.82rem;margin-top:4px">© 2025 - Guia de Estágio Power BI</p>
-</div>
-</div>
-
-</main>
-
-<footer class="footer" id="appFooter">
-<p>Guia de Estágio - Power BI © 2025 | Versão 2.0 | Todos os dados armazenados localmente</p>
-</footer>
-
-<div class="toast-container" id="toastContainer"></div>
-<div class="dialog-overlay" id="dialogOverlay">
-<div class="dialog" id="dialogBox">
-<h3 id="dialogTitle">Confirmar</h3>
-<p id="dialogMsg">Tem a certeza?</p>
-<div class="dialog-actions">
-<button class="btn btn-secondary" onclick="closeDialog()">Cancelar</button>
-<button class="btn btn-danger" id="dialogConfirm">Confirmar</button>
-</div>
-</div>
-</div>
-
 <script>
-const STORAGE_KEY='powerbi-internship-guide-state';
-
-const MODULES_DATA=[
-{id:1,title:'Módulo 1: Introdução ao Power BI',duration:'4 horas',difficulty:'Fácil',description:'Conheça o Power BI, a sua história, componentes e como começar.',content:`<h4>1.1 O que é o Power BI?</h4><p>O Power BI é uma plataforma de Business Intelligence da Microsoft que permite ligar-se a diversas fontes de dados, transformá-los e criar visualizações interativas e relatórios profissionais. Lançado em 2015, tornou-se rapidamente a ferramenta líder de mercado segundo o Quadrante Mágico da Gartner.</p><h4>1.2 Componentes do Power BI</h4><ul><li><strong>Power BI Desktop</strong> — Aplicação gratuita para Windows para criação de relatórios e modelos de dados.</li><li><strong>Power BI Service</strong> — Plataforma na cloud (app.powerbi.com) para publicação, partilha e colaboração.</li><li><strong>Power BI Mobile</strong> — Aplicações para iOS e Android para consulta de relatórios em mobilidade.</li><li><strong>Power BI Report Server</strong> — Servidor on-premises para organizações que necessitam manter dados internamente.</li><li><strong>Power BI Embedded</strong> — APIs para incorporar relatórios em aplicações próprias.</li></ul><h4>1.3 Licenciamento</h4><p>Existem várias modalidades de licenciamento: Power BI Free (individual, funcionalidades limitadas), Power BI Pro (partilha e colaboração, por utilizador/mês), Power BI Premium (capacidade dedicada, ideal para grandes organizações) e Power BI Premium Per User (funcionalidades premium por utilizador).</p><h4>1.4 Instalação e Configuração</h4><p>O Power BI Desktop pode ser descarregado gratuitamente a partir do site da Microsoft ou da Microsoft Store. A instalação é simples e requer Windows 8.1 ou superior, com pelo menos 2 GB de RAM (recomendado 4 GB+). Após a instalação, é possível iniciar sessão com uma conta Microsoft para aceder a funcionalidades adicionais.</p><h4>1.5 Interface do Power BI Desktop</h4><p>A interface principal divide-se em três vistas: Vista de Relatório (onde se criam as visualizações), Vista de Dados (para inspecionar as tabelas) e Vista de Modelo (para gerir relações entre tabelas). O painel lateral apresenta Campos, Visualizações e Filtros.</p>`},
-{id:2,title:'Módulo 2: Obtenção de Dados',duration:'5 horas',difficulty:'Fácil',description:'Aprenda a ligar-se a diversas fontes de dados e importar informação.',content:`<h4>2.1 Fontes de Dados Suportadas</h4><p>O Power BI suporta mais de 100 conectores nativos, incluindo ficheiros (Excel, CSV, XML, JSON, PDF), bases de dados (SQL Server, Oracle, MySQL, PostgreSQL), serviços online (SharePoint, Dynamics 365, Salesforce, Google Analytics) e muitos outros.</p><h4>2.2 Métodos de Conexão</h4><ul><li><strong>Import (Importação)</strong> — Os dados são carregados para a memória do Power BI Desktop. Ideal para a maioria dos cenários, oferece melhor desempenho nas consultas.</li><li><strong>DirectQuery</strong> — As consultas são enviadas diretamente à fonte de dados em tempo real. Útil para grandes volumes de dados ou quando é necessária informação atualizada ao segundo.</li><li><strong>Live Connection</strong> — Ligação direta a modelos do Analysis Services ou datasets do Power BI Service.</li><li><strong>Composite Models</strong> — Combinação de tabelas importadas com tabelas em DirectQuery no mesmo modelo.</li></ul><h4>2.3 Boas Práticas na Obtenção de Dados</h4><p>Filtrar dados na origem sempre que possível para reduzir o volume de informação. Selecionar apenas as colunas necessárias. Usar parâmetros para tornar as consultas dinâmicas. Documentar as fontes de dados utilizadas no projeto.</p><h4>2.4 Conectar a um Ficheiro Excel</h4><p>No Power BI Desktop, selecione "Obter Dados" > "Excel". Navegue até ao ficheiro, selecione as tabelas ou folhas desejadas. Pode pré-visualizar os dados antes de os carregar. Use "Transformar Dados" para abrir o Power Query e efetuar limpezas antes de carregar.</p><h4>2.5 Conectar a uma Base de Dados SQL</h4><p>Selecione "Obter Dados" > "SQL Server". Insira o nome do servidor e da base de dados. Pode opcionalmente escrever uma consulta SQL nativa para filtrar dados na origem. Escolha entre Import e DirectQuery conforme o cenário.</p>`},
-{id:3,title:'Módulo 3: Transformação de Dados - Power Query',duration:'8 horas',difficulty:'Médio',description:'Domine o Power Query para limpar e transformar dados antes de os analisar.',content:`<h4>3.1 O que é o Power Query?</h4><p>O Power Query é o motor de ETL (Extract, Transform, Load) integrado no Power BI. Permite limpar, transformar e combinar dados de múltiplas fontes através de uma interface gráfica intuitiva ou da linguagem M. Cada transformação é gravada como um passo que pode ser editado ou removido.</p><h4>3.2 Interface do Editor do Power Query</h4><p>O Editor do Power Query apresenta um painel de Consultas à esquerda, a pré-visualização de dados ao centro, e os Passos Aplicados e propriedades da consulta à direita. O friso contém separadores para as operações mais comuns: Home, Transformar, Adicionar Coluna e Vista.</p><h4>3.3 Transformações Comuns</h4><ul><li><strong>Remover colunas</strong> — Eliminar colunas desnecessárias para otimizar o modelo.</li><li><strong>Filtrar linhas</strong> — Remover registos irrelevantes ou inválidos.</li><li><strong>Alterar tipos de dados</strong> — Garantir que cada coluna tem o tipo correto (texto, número, data, etc.).</li><li><strong>Dividir colunas</strong> — Separar informação contida numa única coluna.</li><li><strong>Combinar consultas</strong> — Unir (Merge) ou anexar (Append) tabelas de diferentes fontes.</li><li><strong>Pivotar/Despivotar</strong> — Reestruturar dados entre formato largo e longo.</li><li><strong>Coluna condicional</strong> — Criar novas colunas baseadas em condições lógicas.</li><li><strong>Substituir valores</strong> — Corrigir erros e padronizar dados.</li></ul><h4>3.4 Linguagem M</h4><p>A linguagem M (Mashup) é a linguagem funcional por detrás do Power Query. Cada passo na interface gráfica gera código M que pode ser editado manualmente na barra de fórmulas ou no Editor Avançado. A estrutura básica de uma consulta M usa expressões let...in.</p><h4>3.5 Boas Práticas no Power Query</h4><p>Nomear os passos de forma descritiva. Manter uma sequência lógica de transformações. Filtrar dados o mais cedo possível. Desativar o carregamento de consultas auxiliares. Documentar transformações complexas. Evitar transformações que impeçam o Query Folding quando possível.</p>`},
-{id:4,title:'Módulo 4: Modelação de Dados',duration:'8 horas',difficulty:'Médio',description:'Aprenda a criar modelos de dados eficientes com esquema em estrela e DAX.',content:`<h4>4.1 Conceitos Fundamentais de Modelação</h4><p>A modelação de dados é o processo de organizar e relacionar as tabelas do modelo para otimizar as consultas e cálculos. Um bom modelo de dados é a base de relatórios eficientes e medidas DAX corretas.</p><h4>4.2 Esquema em Estrela (Star Schema)</h4><p>O esquema em estrela é o padrão recomendado pela Microsoft para modelos Power BI. Consiste em tabelas de factos (contêm as métricas/medidas numéricas e chaves estrangeiras) rodeadas por tabelas de dimensão (contêm atributos descritivos). As vantagens incluem: melhor desempenho, DAX mais simples e modelo mais intuitivo.</p><h4>4.3 Relações entre Tabelas</h4><ul><li><strong>Um-para-Muitos (1:N)</strong> — O tipo mais comum. A tabela de dimensão (lado 1) relaciona-se com a tabela de factos (lado N).</li><li><strong>Cardinalidade</strong> — Define quantos registos de cada lado participam na relação.</li><li><strong>Direção do filtro</strong> — Normalmente unidirecional (da dimensão para o facto). A filtragem bidirecional deve ser usada com cautela.</li><li><strong>Relações ativas vs inativas</strong> — Apenas uma relação ativa entre duas tabelas; relações inativas podem ser ativadas com USERELATIONSHIP.</li></ul><h4>4.4 Introdução ao DAX</h4><p>DAX (Data Analysis Expressions) é a linguagem de fórmulas do Power BI. Existem dois tipos de cálculos DAX: colunas calculadas (avaliadas linha a linha, armazenadas no modelo) e medidas (avaliadas no contexto de avaliação, calculadas em tempo real). As funções DAX mais básicas incluem SUM, AVERAGE, COUNT, MIN, MAX, DISTINCTCOUNT e DIVIDE.</p><h4>4.5 Tabela de Datas</h4><p>Uma tabela de datas dedicada é essencial para a inteligência temporal no DAX. Deve conter uma coluna de data contígua (sem lacunas), cobrindo todo o período dos dados. Pode ser criada com CALENDAR ou CALENDARAUTO. Deve ser marcada como tabela de datas nas propriedades do modelo.</p>`},
-{id:5,title:'Módulo 5: Visualizações e Relatórios',duration:'6 horas',difficulty:'Médio',description:'Crie relatórios visuais impactantes e interativos com as melhores práticas.',content:`<h4>5.1 Tipos de Visualizações</h4><ul><li><strong>Gráfico de Barras/Colunas</strong> — Ideal para comparações entre categorias. Use barras horizontais quando há muitas categorias ou rótulos longos.</li><li><strong>Gráfico de Linhas</strong> — Perfeito para tendências ao longo do tempo. Combine com áreas para mostrar volumes.</li><li><strong>Gráfico Circular/Anel</strong> — Use com moderação, apenas para 2-5 categorias. Difícil de ler com muitas fatias.</li><li><strong>Cartão e KPI</strong> — Para métricas isoladas e indicadores de desempenho com metas.</li><li><strong>Tabela e Matriz</strong> — Para dados detalhados que necessitam de precisão numérica.</li><li><strong>Mapa</strong> — Para dados geográficos. Use mapas de formas para regiões personalizadas.</li><li><strong>Dispersão</strong> — Para correlações entre duas variáveis numéricas.</li><li><strong>Treemap</strong> — Para hierarquias e proporções de categorias.</li><li><strong>Funil</strong> — Para processos sequenciais com diminuição de valores.</li></ul><h4>5.2 Formatação e Design</h4><p>Use temas consistentes em todo o relatório. Alinhe os visuais numa grelha. Deixe espaço em branco para respirar. Use cores com propósito (não decorativo). Limite a paleta a 5-7 cores. Garanta contraste suficiente para legibilidade. Adicione títulos claros a cada visual.</p><h4>5.3 Interatividade</h4><p>Configure o cross-filtering entre visuais. Use bookmarks para criar navegação personalizada. Adicione botões e imagens clicáveis. Configure drill-through para páginas de detalhe. Use tooltips personalizados para informação adicional ao passar o rato. Adicione slicers (segmentadores) para filtragem pelo utilizador.</p><h4>5.4 Acessibilidade</h4><p>Adicione texto alternativo a todos os visuais. Use cores acessíveis (contraste WCAG AA). Garanta navegação por teclado. Use rótulos de dados quando apropriado. Teste o relatório com leitores de ecrã.</p>`},
-{id:6,title:'Módulo 6: DAX Avançado',duration:'10 horas',difficulty:'Difícil',description:'Aprofunde os conhecimentos de DAX com funções avançadas e padrões complexos.',content:`<h4>6.1 Contexto de Avaliação</h4><p>Compreender os contextos de avaliação é fundamental para dominar o DAX. O contexto de filtro determina quais linhas são visíveis para uma expressão. O contexto de linha é criado por colunas calculadas e funções iteradoras. A transição de contexto ocorre quando CALCULATE transforma um contexto de linha em contexto de filtro.</p><h4>6.2 CALCULATE e Modificadores de Filtro</h4><p>CALCULATE é a função mais importante do DAX. Permite modificar o contexto de filtro de uma expressão. Modificadores incluem: REMOVEFILTERS (remove filtros de colunas/tabelas), ALL (retorna todas as linhas ignorando filtros), ALLSELECTED (mantém apenas filtros externos ao visual), KEEPFILTERS (intersecta em vez de substituir filtros), VALUES e FILTER para filtros mais complexos.</p><h4>6.3 Inteligência Temporal (Time Intelligence)</h4><ul><li><strong>TOTALYTD / TOTALQTD / TOTALMTD</strong> — Acumulados do ano/trimestre/mês até à data.</li><li><strong>SAMEPERIODLASTYEAR</strong> — Mesmo período do ano anterior para comparações.</li><li><strong>DATEADD</strong> — Deslocamento de períodos de data (flexível).</li><li><strong>PARALLELPERIOD</strong> — Período paralelo completo.</li><li><strong>DATESYTD / DATESQTD / DATESMTD</strong> — Conjunto de datas para acumulados.</li></ul><h4>6.4 Funções Iteradoras</h4><p>SUMX, AVERAGEX, COUNTX, MAXX, MINX e RANKX iteram sobre uma tabela e avaliam uma expressão para cada linha. São fundamentais para cálculos que dependem de valores calculados linha a linha. Exemplo: SUMX(Vendas, Vendas[Quantidade] * Vendas[PreçoUnitário]).</p><h4>6.5 Variáveis (VAR/RETURN)</h4><p>As variáveis melhoram a legibilidade, desempenho e depuração do código DAX. São avaliadas uma única vez (lazy evaluation) e podem armazenar valores escalares ou tabelas. Padrão recomendado: VAR _resultado = expressão RETURN _resultado.</p><h4>6.6 Padrões DAX Comuns</h4><p>Percentagem do total (DIVIDE com ALL), ranking dinâmico (RANKX), médias móveis (AVERAGEX com DATESINPERIOD), variação percentual período anterior (DIVIDE com comparação temporal), ABC analysis, e muitos outros padrões documentados pela comunidade.</p>`},
-{id:7,title:'Módulo 7: Power BI Service',duration:'6 horas',difficulty:'Médio',description:'Publique, partilhe e colabore usando o Power BI Service na cloud.',content:`<h4>7.1 Publicação de Relatórios</h4><p>Após criar um relatório no Power BI Desktop, publique-o no Power BI Service através de "Ficheiro" > "Publicar" > "Publicar no Power BI". Selecione a área de trabalho de destino. O relatório e o dataset são publicados separadamente, permitindo múltiplos relatórios sobre o mesmo dataset.</p><h4>7.2 Áreas de Trabalho (Workspaces)</h4><p>As áreas de trabalho são espaços colaborativos onde equipas podem trabalhar em conjunto. Cada workspace pode conter relatórios, dashboards, datasets e dataflows. As funções inclu
+(function() {
+  'use strict';
+  /* ===== DATA ===== */
+  const NAV_ITEMS = [
+    { id: 'dashboard', icon: '📊', label: 'Dashboard' },
+    { id: 'modulos', icon: '📚', label: 'Módulos' },
+    { id: 'fichas', icon: '📝', label: 'Fichas de Trabalho' },
+    { id: 'diario', icon: '📖', label: 'Diário de Bordo' },
+    { id: 'competencias', icon: '🎯', label: 'Competências' },
+    { id: 'avaliacao', icon: '✅', label: 'Avaliação' },
+    { id: 'recursos', icon: '🔗', label: 'Recursos' },
+    { id: 'definicoes', icon: '⚙️', label: 'Definições' }
+  ];
+  const MODULES = [
+    {
+      id: 1, name: 'Introdução ao Power BI', difficulty: 'beginner', duration: '4 horas',
+      desc: 'Conheça o ecossistema Power BI, instale o Power BI Desktop e explore a interface.',
+      objectives: ['Compreender o ecossistema Power BI (Desktop, Service, Mobile)', 'Instalar e configurar o Power BI Desktop', 'Navegar pela interface e entender os painéis principais', 'Criar o primeiro relatório simples'],
+      content: 'O Power BI é uma plataforma de Business Intelligence da Microsoft que permite conectar, transformar, modelar e visualizar dados. Neste módulo, vamos explorar os três componentes principais: Power BI Desktop (ferramenta de autoria), Power BI Service (publicação e colaboração na cloud) e Power BI Mobile (visualização em dispositivos móveis). Aprenderá a navegar pelo Editor de Relatórios, pelo painel de Dados e pelo painel de Visualizações.'
+    },
+    {
+      id: 2, name: 'Power Query & ETL', difficulty: 'beginner', duration: '6 horas',
+      desc: 'Domine o Editor de Power Query para conectar, limpar e transformar dados.',
+      objectives: ['Conectar a múltiplas fontes de dados (Excel, CSV, SQL, Web)', 'Aplicar transformações comuns (remover colunas, filtrar, substituir)', 'Combinar consultas com Append e Merge', 'Compreender noções básicas da linguagem M'],
+      content: 'O Power Query é o motor ETL (Extract, Transform, Load) do Power BI. Permite conectar a centenas de fontes de dados e aplicar transformações sem alterar os dados originais. Cada passo é registado e pode ser editado a qualquer momento. Aprenderá a limpar dados com erros, a criar colunas calculadas, a separar e combinar colunas, e a fazer junções entre tabelas usando Merge e Append.'
+    },
+    {
+      id: 3, name: 'Modelação de Dados', difficulty: 'intermediate', duration: '5 horas',
+      desc: 'Aprenda a criar modelos de dados eficientes com esquema em estrela.',
+      objectives: ['Compreender o esquema em estrela e esquema floco de neve', 'Criar e gerir relações entre tabelas', 'Definir chaves primárias e estrangeiras', 'Aplicar melhores práticas de modelação'],
+      content: 'A modelação de dados é a base de qualquer solução Power BI eficiente. O esquema em estrela organiza os dados em tabelas de factos (métricas numéricas) e tabelas de dimensões (atributos descritivos). Uma boa modelação garante performance nas consultas e facilidade na criação de medidas DAX. Aprenderá a criar relações 1:N, a evitar relações ambíguas e a usar tabelas de datas.'
+    },
+    {
+      id: 4, name: 'DAX Fundamentos', difficulty: 'intermediate', duration: '8 horas',
+      desc: 'Domine as bases do DAX: colunas calculadas, medidas e contexto de filtro.',
+      objectives: ['Diferenciar colunas calculadas de medidas', 'Criar medidas com SUM, AVERAGE, COUNT, DISTINCTCOUNT', 'Compreender CALCULATE e o contexto de filtro', 'Usar funções lógicas: IF, SWITCH, AND, OR'],
+      content: 'DAX (Data Analysis Expressions) é a linguagem de fórmulas do Power BI para criar cálculos avançados. As colunas calculadas são avaliadas linha a linha e armazenadas no modelo; as medidas são calculadas em tempo real conforme o contexto visual. CALCULATE é a função mais importante do DAX, pois permite modificar o contexto de filtro. Aprenderá a criar medidas de agregação, a usar variáveis com VAR/RETURN e a compreender a avaliação em contexto.'
+    },
+    {
+      id: 5, name: 'DAX Avançado', difficulty: 'advanced', duration: '10 horas',
+      desc: 'Aprofunde o DAX com inteligência temporal, iteradores e padrões avançados.',
+      objectives: ['Implementar funções de Time Intelligence (YTD, QTD, SAMEPERIODLASTYEAR)', 'Usar iteradores: SUMX, AVERAGEX, MAXX, RANKX', 'Dominar FILTER, ALL, ALLEXCEPT, VALUES', 'Criar padrões de cálculo complexos com variáveis'],
+      content: 'O DAX avançado abre portas para análises sofisticadas. As funções de Time Intelligence permitem comparar períodos, calcular acumulados e variações temporais. Os iteradores avaliam uma expressão para cada linha de uma tabela antes de agregar. FILTER cria tabelas virtuais filtradas, ALL remove filtros para cálculos de percentagem e totais. Aprenderá padrões como percentagem do total, ranking dinâmico e médias móveis.'
+    },
+    {
+      id: 6, name: 'Visualizações', difficulty: 'intermediate', duration: '6 horas',
+      desc: 'Crie relatórios visuais impactantes com gráficos, formatação condicional e tooltips.',
+      objectives: ['Escolher o tipo de gráfico adequado para cada análise', 'Aplicar formatação condicional a tabelas e matrizes', 'Criar tooltips personalizadas com páginas de relatório', 'Implementar bookmarks e botões de navegação'],
+      content: 'A escolha certa de visualização é crucial para comunicar insights. Gráficos de barras para comparações, linhas para tendências, mapas para dados geográficos, cartões para KPIs. A formatação condicional com regras de cores, barras de dados e ícones torna tabelas mais intuitivas. As tooltips personalizadas permitem mostrar informação adicional ao passar o rato. Bookmarks e botões de navegação criam experiências interativas.'
+    },
+    {
+      id: 7, name: 'Power BI Service', difficulty: 'intermediate', duration: '5 horas',
+      desc: 'Publique relatórios, crie dashboards e configure segurança no Power BI Service.',
+      objectives: ['Publicar relatórios do Desktop para o Service', 'Criar dashboards com pins de diferentes relatórios', 'Configurar workspaces e gerir acessos', 'Implementar Row-Level Security (RLS)'],
+      content: 'O Power BI Service é a plataforma cloud onde se partilham e colaboram em relatórios. Após publicar do Desktop, pode criar dashboards que combinam elementos visuais de múltiplos relatórios. Os workspaces organizam conteúdo por equipa ou projeto. A Row-Level Security permite filtrar dados por utilizador, garantindo que cada pessoa vê apenas os dados autorizados. Aprenderá também agendamento de atualizações e alertas de dados.'
+    },
+    {
+      id: 8, name: 'Projeto Final', difficulty: 'advanced', duration: '12 horas',
+      desc: 'Aplique todos os conhecimentos num projeto completo de ponta a ponta.',
+      objectives: ['Definir requisitos e KPIs com stakeholders', 'Implementar ETL completo com Power Query', 'Construir modelo de dados em estrela optimizado', 'Criar medidas DAX avançadas e relatório interativo'],
+      content: 'O projeto final integra todas as competências adquiridas. Partindo de dados reais ou simulados, irá definir objetivos de negócio, conectar e transformar dados com Power Query, construir um modelo de dados robusto, criar medidas DAX para KPIs, desenvolver visualizações interativas e publicar no Power BI Service. Este projeto simula um cenário real de estágio e serve como peça de portfólio.'
+    }
+  ];
+  const WORKSHEETS = [
+    { id: 'w1', module: 1, title: 'Instalação e Primeiro Relatório', desc: 'Instale o Power BI Desktop e crie um relatório simples com dados de exemplo.', difficulty: 'beginner' },
+    { id: 'w2', module: 1, title: 'Explorar a Interface', desc: 'Identifique todos os painéis da interface e crie um relatório com 3 visualizações.', difficulty: 'beginner' },
+    { id: 'w3', module: 2, title: 'Importar e Limpar Dados', desc: 'Importe um ficheiro CSV com erros e aplique transformações para limpar os dados.', difficulty: 'beginner' },
+    { id: 'w4', module: 2, title: 'Combinar Tabelas', desc: 'Use Merge e Append para combinar dados de múltiplas fontes.', difficulty: 'intermediate' },
+    { id: 'w5', module: 3, title: 'Criar Esquema em Estrela', desc: 'Transforme uma tabela desnormalizada num modelo em estrela com facto e dimensões.', difficulty: 'intermediate' },
+    { id: 'w6', module: 3, title: 'Gerir Relações', desc: 'Configure relações entre 5 tabelas, identificando e corrigindo ambiguidades.', difficulty: 'intermediate' },
+    { id: 'w7', module: 4, title: 'Primeiras Medidas DAX', desc: 'Crie medidas de SUM, AVERAGE, COUNT e DISTINCTCOUNT para um dataset de vendas.', difficulty: 'intermediate' },
+    { id: 'w8', module: 4, title: 'CALCULATE e Filtros', desc: 'Use CALCULATE com diferentes modificadores de filtro para criar KPIs.', difficulty: 'intermediate' },
+    { id: 'w9', module: 5, title: 'Time Intelligence', desc: 'Implemente YTD, comparação com ano anterior e variação percentual.', difficulty: 'advanced' },
+    { id: 'w10', module: 5, title: 'Rankings e Iteradores', desc: 'Crie rankings dinâmicos com RANKX e cálculos iterativos com SUMX.', difficulty: 'advanced' },
+    { id: 'w11', module: 6, title: 'Dashboard de Vendas', desc: 'Crie um dashboard completo com gráficos, KPIs e formatação condicional.', difficulty: 'intermediate' },
+    { id: 'w12', module: 6, title: 'Tooltips e Bookmarks', desc: 'Implemente tooltips personalizadas e navegação com bookmarks.', difficulty: 'intermediate' },
+    { id: 'w13', module: 7, title: 'Publicar e Partilhar', desc: 'Publique um relatório no Service e configure um workspace de equipa.', difficulty: 'intermediate' },
+    { id: 'w14', module: 7, title: 'Row-Level Security', desc: 'Configure RLS para filtrar dados por região para diferentes utilizadores.', difficulty: 'advanced' },
+    { id: 'w15', module: 8, title: 'Projeto Completo', desc: 'Desenvolva um projeto de ponta a ponta com dados reais ou simulados.', difficulty: 'advanced' },
+    { id: 'w16', module: 8, title: 'Apresentação Final', desc: 'Prepare e apresente o seu projeto com storytelling de dados.', difficulty: 'advanced' }
+  ];
+  const SKILLS_LIST = [
+    { id: 'power_query', label: 'Power Query' },
+    { id: 'dax', label: 'DAX' },
+    { id: 'modelacao', label: 'Modelação' },
+    { id: 'visualizacoes', label: 'Visualizações' },
+    { id: 'service', label: 'Power BI Service' },
+    { id: 'comunicacao', label: 'Comunicação' }
+  ];
+  const QUIZ = [
+    { q: 'Qual é o componente do Power BI usado para criar relatórios?', opts: ['Power BI Mobile', 'Power BI Service', 'Power BI Desktop', 'Power Automate'], correct: 2 },
+    { q: 'O que significa ETL?', opts: ['Extract, Transform, Load', 'Export, Transfer, Link', 'Edit, Test, Launch', 'Evaluate, Track, Log'], correct: 0 },
+    { q: 'Num esquema em estrela, as tabelas centrais chamam-se:', opts: ['Tabelas de Dimensão', 'Tabelas de Facto', 'Tabelas de Ponte', 'Tabelas de Lookup'], correct: 1 },
+    { q: 'Qual função DAX modifica o contexto de filtro?', opts: ['SUM', 'FILTER', 'CALCULATE', 'RELATED'], correct: 2 },
+    { q: 'SUMX é um exemplo de:', opts: ['Função de agregação', 'Função de texto', 'Iterador', 'Função de data'], correct: 2 },
+    { q: 'Qual função retorna o valor do ano até à data?', opts: ['TOTALYTD', 'SAMEPERIODLASTYEAR', 'DATEADD', 'PREVIOUSMONTH'], correct: 0 },
+    { q: 'Para remover todos os filtros de uma coluna usa-se:', opts: ['REMOVEFILTERS', 'ALL', 'CLEAR', 'RESET'], correct: 1 },
+    { q: 'O que é Row-Level Security (RLS)?', opts: ['Encriptação de dados', 'Filtragem de dados por utilizador', 'Backup automático', 'Compressão de dados'], correct: 1 },
+    { q: 'Qual visualização é melhor para mostrar tendências ao longo do tempo?', opts: ['Gráfico circular', 'Gráfico de barras', 'Gráfico de linhas', 'Treemap'], correct: 2 },
+    { q: 'Onde se publica um relatório para partilhar com a equipa?', opts: ['Power BI Desktop', 'Power BI Service', 'Excel', 'SharePoint'], correct: 1 }
+  ];
+  const RESOURCES = {
+    'Documentação': { badge: 'rb-doc', items: [
+      { title: 'Documentação Oficial Power BI', desc: 'Referência completa da Microsoft para Power BI Desktop e Service.' },
+      { title: 'Referência DAX', desc: 'Guia completo de todas as funções DAX com exemplos.' },
+      { title: 'Referência M / Power Query', desc: 'Documentação da linguagem M para transformações avançadas.' },
+      { title: 'Power BI REST API', desc: 'Documentação para integração e automação via API.' }
+    ]},
+    'YouTube': { badge: 'rb-yt', items: [
+      { title: 'Guy in a Cube', desc: 'Canal com tutoriais semanais sobre Power BI e DAX.' },
+      { title: 'SQLBI', desc: 'Marco Russo e Alberto Ferrari com conteúdo avançado de DAX e modelação.' },
+      { title: 'Curbal', desc: 'Ruth Pozuelo com dicas práticas e tutoriais passo a passo.' },
+      { title: 'Havens Consulting', desc: 'Parker Stevens com tutoriais detalhados e projetos completos.' }
+    ]},
+    'Comunidades': { badge: 'rb-comm', items: [
+      { title: 'Power BI Community', desc: 'Fórum oficial da Microsoft com milhares de perguntas e respostas.' },
+      { title: 'Reddit r/PowerBI', desc: 'Comunidade ativa com discussões, dicas e partilha de projetos.' },
+      { title: 'LinkedIn Power BI Groups', desc: 'Grupos profissionais para networking e aprendizagem.' }
+    ]},
+    'Livros': { badge: 'rb-book', items: [
+      { title: 'The Definitive Guide to DAX', desc: 'Por Marco Russo e Alberto Ferrari — a bíblia do DAX.' },
+      { title: 'Power BI Cookbook', desc: 'Receitas práticas para resolver problemas comuns em Power BI.' },
+      { title: 'Analyzing Data with Power BI', desc: 'Guia completo de análise de dados com exemplos reais.' }
+    ]},
+    'Ferramentas': { badge: 'rb-tool', items: [
+      { title: 'DAX Studio', desc: 'Ferramenta gratuita para escrever, testar e otimizar consultas DAX.' },
+      { title: 'Tabular Editor', desc: 'Editor avançado para modelos tabulares com scripting C#.' },
+      { title: 'ALM Toolkit', desc: 'Ferramenta para comparar e migrar modelos Power BI.' },
+      { title: 'Bravo', desc: 'Ferramenta gratuita para formatar medidas, gerir tabelas de datas e analisar modelos.' }
+    ]}
+  };
+  /* ===== STATE ===== */
+  function loadState() {
+    try {
+      return JSON.parse(localStorage.getItem('pbi_guide_state')) || {};
+    } catch(e) { return {}; }
+  }
+  function saveState(s) { localStorage.setItem('pbi_guide_state', JSON.stringify(s)); }
+  let state = loadState();
+  function getDefault(key, def) { return state[key] !== undefined ? state[key] : def; }
+  function setState(key, val) { state[key] = val; saveState(state); }
+  /* ===== TOAST ===== */
+  function toast(msg, type) {
+    type = type || 'info';
+    var icons = { success: '✅', warning: '⚠️', danger: '❌', info: 'ℹ️' };
+    var c = document.getElementById('toast-container');
+    var t = document.createElement('div');
+    t.className = 'toast ' + type;
+    t.innerHTML = '<span class="toast-icon">' + (icons[type]||'ℹ️') + '</span><span>' + msg + '</span>';
+    c.appendChild(t);
+    requestAnimationFrame(function() { t.classList.add('show'); });
+    setTimeout(function() {
+      t.classList.remove('show');
+      setTimeout(function() { if(t.parentNode) t.parentNode.removeChild(t); }, 400);
+    }, 3000);
+  }
+  /* ===== MODAL ===== */
+  function showModal(title, message, onConfirm) {
+    var ov = document.getElementById('modal-overlay');
+    var bx = document.getElementById('modal-box');
+    bx.innerHTML = '<h3>' + title + '</h3><p>' + message + '</p><div class="modal-btns"><button class="btn-secondary" id="modal-cancel">Cancelar</button><button class="btn-danger" id="modal-confirm">Confirmar</button></div>';
+    ov.classList.add('show');
+    document.getElementById('modal-cancel').onclick = function() { ov.classList.remove('show'); };
+    document.getElementById('modal-confirm').onclick = function() { ov.classList.remove('show'); if(onConfirm) onConfirm(); };
+  }
+  /* ===== THEME ===== */
+  function applyTheme() {
+    var t = getDefault('theme', 'light');
+    document.documentElement.setAttribute('data-theme', t);
+  }
+  function toggleTheme() {
+    var t = getDefault('theme', 'light') === 'light' ? 'dark' : 'light';
+    setState('theme', t);
+    applyTheme();
+    renderCurrent();
+    toast('Tema alterado para ' + (t === 'light' ? 'Claro ☀️' : 'Escuro 🌙'), 'info');
+  }
+  applyTheme();
+  /* ===== NAV ===== */
+  var currentSection = getDefault('currentSection', 'dashboard');
+  function renderNav() {
+    var nav = document.getElementById('sidebar-nav');
+    nav.innerHTML = '';
+    NAV_ITEMS.forEach(function(item) {
+      var d = document.createElement('div');
+      d.className = 'sidebar-nav-item' + (item.id === currentSection ? ' active' : '');
+      d.innerHTML = '<span class="sidebar-nav-icon">' + item.icon + '</span><span>' + item.label + '</span>';
+      d.onclick = function() { navigateTo(item.id); };
+      nav.appendChild(d);
+    });
+  }
+  function navigateTo(id) {
+    currentSection = id;
+    setState('currentSection', id);
+    renderNav();
+    renderCurrent();
+    closeSidebar();
+  }
+  /* ===== SIDEBAR MOBILE ===== */
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('overlay');
+  var hamburger = document.getElementById('hamburger');
+  hamburger.onclick = function() { sidebar.classList.add('open'); overlay.classList.add('show'); };
+  overlay.onclick = closeSidebar;
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+  /* ===== RENDER ===== */
+  function renderCurrent() {
+    var mc = document.getElementById('main-content');
+    switch(currentSection) {
+      case 'dashboard': mc.innerHTML = renderDashboard(); break;
+      case 'modulos': mc.innerHTML = renderModulos(); break;
+      case 'fichas': mc.innerHTML = renderFichas(); break;
+      case 'diario': mc.innerHTML = renderDiario(); break;
+      case 'competencias': mc.innerHTML = renderCompetencias(); break;
+      case 'avaliacao': mc.innerHTML = renderAvaliacao(); break;
+      case 'recursos': mc.innerHTML = renderRecursos(); break;
+      case 'definicoes': mc.innerHTML = renderDefinicoes(); break;
+    }
+    attachEvents();
+  }
+  /* ===== HELPERS ===== */
+  function getModulesCompleted() {
+    var mc = getDefault('modulesCompleted', {});
+    var c = 0;
+    MODULES.forEach(function(m) { if(mc[m.id]) c++; });
+    return c;
+  }
+  function getTotalHours() {
+    var entries = getDefault('logEntries', []);
+    var t = 0;
+    entries.forEach(function(e) { t += parseFloat(e.hours) || 0; });
+    return t;
+  }
+  function getSkillsAvg() {
+    var skills = getDefault('skills', {});
+    var total = 0, count = 0;
+    SKILLS_LIST.forEach(function(s) { total += (skills[s.id] || 0); count++; });
+    return count ? Math.round(total / count) : 0;
+  }
+  function getOverallProgress() {
+    var modPct = (getModulesCompleted() / MODULES.length) * 100;
+    var skillPct = getSkillsAvg();
+    return Math.round((modPct * 0.6 + skillPct * 0.4));
+  }
+  function formatDate(d) {
+    if(!d) return '';
+    var dt = new Date(d);
+    return dt.toLocaleDateString('pt-PT', { day: '2-digit', month: 'long', year: 'numeric' });
+  }
+  function todayStr() { return new Date().toISOString().split('T')[0]; }
+  function diffBadge(d) {
+    var labels = { beginner: 'Iniciante', intermediate: 'Intermédio', advanced: 'Avançado' };
+    return '<span class="module-badge badge-' + d + '">' + (labels[d]||d) + '</span>';
+  }
+  function getWSCompleted() {
+    var wc = getDefault('worksheetsCompleted', {});
+    var c = 0;
+    WORKSHEETS.forEach(function(w) { if(wc[w.id]) c++; });
+    return c;
+  }
+  function addActivity(text) {
+    var acts = getDefault('activities', []);
+    acts.unshift({ text: text, time: new Date().toISOString() });
+    if(acts.length > 30) acts = acts.slice(0, 30);
+    setState('activities', acts);
+  }
+  /* ===== DASHBOARD ===== */
+  function renderDashboard() {
+    var name = getDefault('userName', 'Estagiário');
+    var now = new Date();
+    var dateStr = now.toLocaleDateString('pt-PT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    var mc = getModulesCompleted();
+    var hrs = getTotalHours();
