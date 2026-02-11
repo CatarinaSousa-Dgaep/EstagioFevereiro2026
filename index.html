@@ -838,3 +838,2131 @@
         }
     </style>
 </head>
+
+<body>
+
+    <!-- HAMBURGER MOBILE -->
+    <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Menu">☰</button>
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h1>⚡ Power BI Guide</h1>
+            <p>Guia Completo de Estágio</p>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-title">Principal</div>
+            <div class="nav-item active" onclick="navigateTo('dashboard')">
+                <span class="nav-icon">📊</span>
+                <span>Dashboard</span>
+            </div>
+
+            <div class="nav-section-title">Módulos de Aprendizagem</div>
+            <div class="nav-item" onclick="navigateTo('modulo1')">
+                <span class="nav-icon">📘</span>
+                <span>1. Introdução ao Power BI</span>
+                <span class="nav-check" id="check-modulo1"></span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('modulo2')">
+                <span class="nav-icon">🔄</span>
+                <span>2. Power Query</span>
+                <span class="nav-check" id="check-modulo2"></span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('modulo3')">
+                <span class="nav-icon">🗂️</span>
+                <span>3. Modelação de Dados</span>
+                <span class="nav-check" id="check-modulo3"></span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('modulo4')">
+                <span class="nav-icon">🧮</span>
+                <span>4. DAX</span>
+                <span class="nav-check" id="check-modulo4"></span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('modulo5')">
+                <span class="nav-icon">📈</span>
+                <span>5. Visualizações</span>
+                <span class="nav-check" id="check-modulo5"></span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('modulo6')">
+                <span class="nav-icon">🚀</span>
+                <span>6. Publicação e Partilha</span>
+                <span class="nav-check" id="check-modulo6"></span>
+            </div>
+
+            <div class="nav-section-title">Prática</div>
+            <div class="nav-item" onclick="navigateTo('exercicios')">
+                <span class="nav-icon">🏋️</span>
+                <span>Exercícios Práticos</span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('quiz')">
+                <span class="nav-icon">❓</span>
+                <span>Quiz de Avaliação</span>
+            </div>
+
+            <div class="nav-section-title">Extras</div>
+            <div class="nav-item" onclick="navigateTo('glossario')">
+                <span class="nav-icon">📖</span>
+                <span>Glossário</span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('recursos')">
+                <span class="nav-icon">🔗</span>
+                <span>Recursos Úteis</span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('notas')">
+                <span class="nav-icon">📝</span>
+                <span>Notas Pessoais</span>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="progress-overview">
+                <span>Progresso Global: <strong id="progress-percent">0%</strong></span>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+        <div class="top-bar">
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span id="theme-icon">🌙</span>
+                <span id="theme-text">Tema Escuro</span>
+            </button>
+            <button class="btn btn-reset" onclick="resetProgress()">🔄 Reset Progresso</button>
+        </div>
+
+        <div class="content-area">
+
+            <!-- ========== DASHBOARD ========== -->
+            <div class="section-page active" id="page-dashboard">
+                <h2 class="section-title">📊 Dashboard</h2>
+                <p class="section-subtitle">Bem-vindo ao teu Guia de Estágio Power BI — acompanha o teu progresso aqui.</p>
+
+                <div class="cards-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-value" id="stat-modules">0/6</div>
+                        <div class="stat-label">Módulos Concluídos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-value" id="stat-tasks">0/0</div>
+                        <div class="stat-label">Tarefas Completadas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-value" id="stat-quiz">—</div>
+                        <div class="stat-label">Melhor Nota Quiz</div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 24px;">
+                    <h3>🗺️ Roteiro de Aprendizagem</h3>
+                    <p>Este guia está organizado em 6 módulos sequenciais. Recomendamos seguir a ordem:</p>
+                    <ul>
+                        <li><strong>Módulo 1:</strong> Introdução ao Power BI — conhece a ferramenta e o seu ecossistema.</li>
+                        <li><strong>Módulo 2:</strong> Power Query — aprende a importar, limpar e transformar dados.</li>
+                        <li><strong>Módulo 3:</strong> Modelação de Dados — estrutura as tabelas com esquema em estrela.</li>
+                        <li><strong>Módulo 4:</strong> DAX — domina a linguagem de fórmulas do Power BI.</li>
+                        <li><strong>Módulo 5:</strong> Visualizações — cria dashboards interativos e profissionais.</li>
+                        <li><strong>Módulo 6:</strong> Publicação e Partilha — publica relatórios no Power BI Service.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>💡 Dicas Rápidas</h3>
+                    <div class="info-box tip">
+                        ✅ <strong>Dica:</strong> Marca cada tarefa como concluída à medida que avanças. O teu progresso é guardado automaticamente no browser.
+                    </div>
+                    <div class="info-box note">
+                        📌 <strong>Nota:</strong> Usa a secção "Notas Pessoais" para registar aprendizagens e dúvidas durante o estágio.
+                    </div>
+                    <div class="info-box warning">
+                        ⚠️ <strong>Aviso:</strong> Se limpares os dados do browser (cache/cookies), o progresso será apagado. Considera exportar as tuas notas regularmente.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== MÓDULO 1: INTRODUÇÃO AO POWER BI ========== -->
+            <div class="section-page" id="page-modulo1">
+                <h2 class="section-title">📘 Módulo 1: Introdução ao Power BI</h2>
+                <p class="section-subtitle">Conhece o ecossistema Power BI, os seus componentes e para que serve.</p>
+
+                <div class="card">
+                    <h3>🔍 O que é o Power BI?</h3>
+                    <p>O <strong>Power BI</strong> é uma plataforma de Business Intelligence da Microsoft que permite ligar a diversas fontes de dados, transformá-los, modelá-los e criar relatórios e dashboards interativos. É utilizado por empresas em todo o mundo para apoiar a tomada de decisão baseada em dados.</p>
+                    <p style="margin-top:12px;">O Power BI é composto por vários componentes que trabalham em conjunto:</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🖥️ Power BI Desktop</h3>
+                        <p>Aplicação gratuita para Windows onde se criam os relatórios. Inclui o Power Query Editor para transformação de dados, a vista de modelo para relacionamentos e o canvas para visualizações.</p>
+                        <div class="info-box tip">É aqui que passarás a maior parte do tempo durante o estágio.</div>
+                    </div>
+                    <div class="card">
+                        <h3>☁️ Power BI Service</h3>
+                        <p>Plataforma online (app.powerbi.com) onde se publicam e partilham relatórios. Permite colaboração, agendamento de atualização de dados e criação de dashboards a partir de múltiplos relatórios.</p>
+                    </div>
+                    <div class="card">
+                        <h3>📱 Power BI Mobile</h3>
+                        <p>Aplicação disponível para iOS, Android e Windows. Permite visualizar relatórios e dashboards em qualquer lugar, receber alertas e anotar diretamente nos visuais.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>⚙️ Fluxo de Trabalho Típico</h3>
+                    <p>O processo de trabalho no Power BI segue geralmente estas etapas:</p>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Etapa</th>
+                                <th>Descrição</th>
+                                <th>Ferramenta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. Obter Dados</strong></td>
+                                <td>Ligar a fontes (Excel, SQL, Web, APIs, etc.)</td>
+                                <td>Power Query</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. Transformar</strong></td>
+                                <td>Limpar, formatar e preparar os dados</td>
+                                <td>Power Query Editor</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. Modelar</strong></td>
+                                <td>Criar relações entre tabelas, definir hierarquias</td>
+                                <td>Model View</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4. Visualizar</strong></td>
+                                <td>Criar gráficos, tabelas e visuais interativos</td>
+                                <td>Report View</td>
+                            </tr>
+                            <tr>
+                                <td><strong>5. Publicar</strong></td>
+                                <td>Partilhar com a equipa no Power BI Service</td>
+                                <td>Power BI Service</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>📂 Tipos de Ficheiro</h3>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Extensão</th>
+                                <th>Descrição</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>.pbix</strong></td><td>Ficheiro de projeto do Power BI Desktop (o principal)</td></tr>
+                            <tr><td><strong>.pbit</strong></td><td>Template de Power BI (sem dados, só estrutura)</td></tr>
+                            <tr><td><strong>.pbids</strong></td><td>Ficheiro de ligação a fonte de dados</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>🎯 Interface do Power BI Desktop</h3>
+                    <p>O Power BI Desktop tem três vistas principais, acessíveis pelos ícones à esquerda:</p>
+                    <ul>
+                        <li><strong>Report View (📊):</strong> Onde crias os visuais e montas o layout do relatório. É o canvas principal.</li>
+                        <li><strong>Data View (📋):</strong> Permite visualizar os dados carregados em formato tabular. Útil para verificar transformações.</li>
+                        <li><strong>Model View (🔗):</strong> Mostra o diagrama de relacionamentos entre tabelas. Essencial para a modelação de dados.</li>
+                    </ul>
+                    <div class="info-box note">📌 Dica: Alterna frequentemente entre as três vistas durante o desenvolvimento para garantir que os dados e relações estão corretos.</div>
+                </div>
+
+                <div class="card">
+                    <h3>✅ Tarefas do Módulo 1</h3>
+                    <div class="checklist" data-module="modulo1">
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Instalar o Power BI Desktop no computador</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Criar uma conta gratuita no Power BI Service</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Explorar a interface: Report View, Data View, Model View</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Abrir um ficheiro .pbix de exemplo (ex: Contoso Sales)</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Identificar os componentes: Painéis, Filtros, Campos, Visualizações</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:flex-end; margin-top:20px;">
+                    <button class="btn btn-primary" onclick="navigateTo('modulo2')">Próximo: Power Query →</button>
+                </div>
+            </div>
+
+            <!-- ========== MÓDULO 2: POWER QUERY ========== -->
+            <div class="section-page" id="page-modulo2">
+                <h2 class="section-title">🔄 Módulo 2: Power Query</h2>
+                <p class="section-subtitle">Aprende a importar, limpar e transformar dados antes de os analisar.</p>
+
+                <div class="card">
+                    <h3>🔍 O que é o Power Query?</h3>
+                    <p>O <strong>Power Query</strong> é o motor de ETL (Extract, Transform, Load) integrado no Power BI. Permite ligar a centenas de fontes de dados e aplicar transformações sem alterar os dados originais. Todas as transformações são gravadas como "passos" (steps) que são reaplicados automaticamente sempre que os dados são atualizados.</p>
+                    <div class="info-box tip">✅ O Power Query usa a linguagem <strong>M</strong> (também chamada Power Query Formula Language). Não precisas de a escrever manualmente — a maioria das operações é feita com cliques na interface.</div>
+                </div>
+
+                <div class="card">
+                    <h3>📥 Fontes de Dados Suportadas</h3>
+                    <div class="cards-grid">
+                        <div style="padding:16px; background:var(--bg-input); border-radius:10px;">
+                            <strong style="color:var(--accent);">Ficheiros</strong>
+                            <ul>
+                                <li>Excel (.xlsx, .xls)</li>
+                                <li>CSV / TXT</li>
+                                <li>JSON</li>
+                                <li>XML</li>
+                                <li>PDF</li>
+                                <li>Pasta (múltiplos ficheiros)</li>
+                            </ul>
+                        </div>
+                        <div style="padding:16px; background:var(--bg-input); border-radius:10px;">
+                            <strong style="color:var(--accent);">Bases de Dados</strong>
+                            <ul>
+                                <li>SQL Server</li>
+                                <li>MySQL / PostgreSQL</li>
+                                <li>Oracle</li>
+                                <li>Access</li>
+                                <li>Azure SQL</li>
+                                <li>SAP HANA</li>
+                            </ul>
+                        </div>
+                        <div style="padding:16px; background:var(--bg-input); border-radius:10px;">
+                            <strong style="color:var(--accent);">Online</strong>
+                            <ul>
+                                <li>SharePoint</li>
+                                <li>Dynamics 365</li>
+                                <li>Google Analytics</li>
+                                <li>Salesforce</li>
+                                <li>Web (HTML tables)</li>
+                                <li>APIs REST (OData)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🛠️ Transformações Essenciais</h3>
+                    <p>Estas são as operações que mais usarás no dia-a-dia:</p>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Operação</th>
+                                <th>O que faz</th>
+                                <th>Exemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Remover Colunas</strong></td>
+                                <td>Elimina colunas desnecessárias</td>
+                                <td>Remover coluna "ID_interno"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Filtrar Linhas</strong></td>
+                                <td>Remove linhas que não interessam</td>
+                                <td>Filtrar vendas > 0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Alterar Tipo</strong></td>
+                                <td>Define o tipo de dados correto</td>
+                                <td>Texto → Data, Texto → Número</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Substituir Valores</strong></td>
+                                <td>Troca valores específicos</td>
+                                <td>"N/A" → null</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dividir Coluna</strong></td>
+                                <td>Separa uma coluna em várias</td>
+                                <td>"Lisboa, Portugal" → Cidade + País</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Agrupar Por</strong></td>
+                                <td>Agrega dados por categoria</td>
+                                <td>Total de vendas por região</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Merge Queries</strong></td>
+                                <td>Junta duas tabelas (tipo JOIN SQL)</td>
+                                <td>Vendas + Clientes por ID_Cliente</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Append Queries</strong></td>
+                                <td>Empilha tabelas (tipo UNION SQL)</td>
+                                <td>Vendas_2023 + Vendas_2024</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Coluna Personalizada</strong></td>
+                                <td>Cria nova coluna com fórmula M</td>
+                                <td>[Preço] * [Quantidade]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Unpivot Columns</strong></td>
+                                <td>Transforma colunas em linhas</td>
+                                <td>Meses como colunas → coluna "Mês"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>📝 Exemplo Prático: Linguagem M</h3>
+                    <p>Embora a maioria das operações seja via interface gráfica, é útil entender o código M gerado. Aqui está um exemplo completo:</p>
+                    <div class="code-block">
+                        <span class="code-label">Linguagem M</span>
+let
+    // 1. Ligar à fonte de dados
+    Fonte = Excel.Workbook(
+        File.Contents("C:\Dados\Vendas2024.xlsx"), 
+        null, true
+    ),
+    
+    // 2. Selecionar a tabela
+    Tabela = Fonte{[Item="Vendas", Kind="Sheet"]}[Data],
+    
+    // 3. Promover cabeçalhos
+    Cabecalhos = Table.PromoteHeaders(Tabela, [PromoteAllScalars=true]),
+    
+    // 4. Alterar tipos de dados
+    Tipos = Table.TransformColumnTypes(Cabecalhos, {
+        {"Data", type date},
+        {"Valor", type number},
+        {"Produto", type text},
+        {"Quantidade", Int64.Type}
+    }),
+    
+    // 5. Filtrar linhas nulas
+    Filtrado = Table.SelectRows(Tipos, each [Valor] <> null and [Valor] > 0),
+    
+    // 6. Adicionar coluna calculada
+    ComTotal = Table.AddColumn(Filtrado, "Total", 
+        each [Valor] * [Quantidade], type number),
+    
+    // 7. Remover colunas desnecessárias
+    Limpo = Table.RemoveColumns(ComTotal, {"ColunaTemp", "ID_Antigo"})
+in
+    Limpo
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>⚠️ Boas Práticas no Power Query</h3>
+                    <ul>
+                        <li><strong>Nomeia os passos:</strong> Clica com o botão direito nos Applied Steps e renomeia para algo descritivo (ex: "Filtrar vendas positivas").</li>
+                        <li><strong>Remove colunas cedo:</strong> Quanto menos dados carregares, mais rápido será o modelo.</li>
+                        <li><strong>Define tipos de dados sempre:</strong> Evita erros em cálculos DAX posteriores.</li>
+                        <li><strong>Usa "Close & Apply":</strong> Só quando terminares todas as transformações.</li>
+                        <li><strong>Desativa o carregamento</strong> de tabelas auxiliares que não precisam ir para o modelo (botão direito → "Enable Load" desativado).</li>
+                        <li><strong>Evita colunas com erros:</strong> Verifica sempre o indicador de qualidade no cabeçalho de cada coluna.</li>
+                    </ul>
+                    <div class="info-box warning">⚠️ <strong>Atenção:</strong> Nunca alteres dados diretamente no Data View do Power BI. Todas as transformações devem ser feitas no Power Query para serem reprodutíveis.</div>
+                </div>
+
+                <div class="card">
+                    <h3>✅ Tarefas do Módulo 2</h3>
+                    <div class="checklist" data-module="modulo2">
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Importar um ficheiro Excel para o Power BI</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Abrir o Power Query Editor e explorar a interface</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Remover colunas desnecessárias de uma tabela</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Filtrar linhas com valores nulos ou inválidos</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Alterar tipos de dados (texto, número, data)</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Fazer um Merge de duas tabelas por coluna-chave</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Criar uma coluna personalizada com fórmula M</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Renomear os passos aplicados com nomes descritivos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                    <button class="btn btn-secondary" onclick="navigateTo('modulo1')">← Módulo 1</button>
+                    <button class="btn btn-primary" onclick="navigateTo('modulo3')">Próximo: Modelação →</button>
+                </div>
+            </div>
+
+            <!-- ========== MÓDULO 3: MODELAÇÃO DE DADOS ========== -->
+            <div class="section-page" id="page-modulo3">
+                <h2 class="section-title">🗂️ Módulo 3: Modelação de Dados</h2>
+                <p class="section-subtitle">Aprende a estruturar o modelo de dados com relações, esquema em estrela e boas práticas.</p>
+
+                <div class="card">
+                    <h3>🔍 O que é Modelação de Dados?</h3>
+                    <p>A <strong>modelação de dados</strong> é o processo de organizar e estruturar as tabelas do teu modelo para que o Power BI consiga calcular e agregar informação de forma eficiente. Um bom modelo é a base de qualquer relatório rápido e fiável.</p>
+                    <p style="margin-top:12px;">O objetivo é criar relações lógicas entre tabelas para que, ao interagir com um visual, todos os outros reajam corretamente (cross-filtering).</p>
+                </div>
+
+                <div class="card">
+                    <h3>⭐ Esquema em Estrela (Star Schema)</h3>
+                    <p>O padrão recomendado pela Microsoft para Power BI. Consiste em:</p>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Tipo de Tabela</th>
+                                <th>Função</th>
+                                <th>Exemplos</th>
+                                <th>Características</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Tabela de Factos</strong></td>
+                                <td>Contém os eventos/transações (dados numéricos)</td>
+                                <td>Vendas, Encomendas, Pagamentos</td>
+                                <td>Muitas linhas, colunas numéricas + chaves estrangeiras</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tabela de Dimensão</strong></td>
+                                <td>Contém atributos descritivos (contexto)</td>
+                                <td>Clientes, Produtos, Datas, Lojas</td>
+                                <td>Menos linhas, colunas descritivas + chave primária</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="info-box tip">✅ <strong>Regra de ouro:</strong> As dimensões filtram os factos. As setas de relação devem apontar da dimensão para o facto (1 para muitos).</div>
+
+                    <div class="code-block">
+                        <span class="code-label">Diagrama Conceptual</span>
+        [DimData] ──1:N──┐
+                          │
+      [DimProduto] ──1:N──┤
+                          ├── [FactVendas]
+      [DimCliente] ──1:N──┤
+                          │
+         [DimLoja] ──1:N──┘
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🔗 Tipos de Relações</h3>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Cardinalidade</th>
+                                <th>Descrição</th>
+                                <th>Uso Comum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1:N (Um para Muitos)</strong></td>
+                                <td>Uma linha da dimensão corresponde a muitas no facto</td>
+                                <td>O mais comum — ex: 1 produto → muitas vendas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>1:1 (Um para Um)</strong></td>
+                                <td>Uma linha corresponde a exatamente uma noutra tabela</td>
+                                <td>Raro — ex: Funcionário → Detalhe de contrato</td>
+                            </tr>
+                            <tr>
+                                <td><strong>N:N (Muitos para Muitos)</strong></td>
+                                <td>Múltiplas correspondências em ambos os lados</td>
+                                <td>Evitar se possível — usar tabela-ponte</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="info-box warning">⚠️ <strong>Atenção:</strong> Relações N:N podem gerar resultados inesperados. Sempre que possível, reestrutura os dados para usar relações 1:N.</div>
+                </div>
+
+                <div class="card">
+                    <h3>📅 Tabela de Datas (Essencial)</h3>
+                    <p>Toda a análise temporal no Power BI necessita de uma <strong>tabela de datas dedicada</strong>. Sem ela, funcionalidades como YTD, comparação com período anterior e hierarquias temporais não funcionam corretamente.</p>
+                    <div class="code-block">
+                        <span class="code-label">DAX — Criar Tabela de Datas</span>
+DimCalendario = 
+ADDCOLUMNS(
+    CALENDARAUTO(),
+    "Ano", YEAR([Date]),
+    "Mês Nº", MONTH([Date]),
+    "Mês Nome", FORMAT([Date], "MMMM"),
+    "Mês Abrev", FORMAT([Date], "MMM"),
+    "Trimestre", "Q" & FORMAT([Date], "Q"),
+    "Dia da Semana", WEEKDAY([Date], 2),
+    "Nome Dia", FORMAT([Date], "dddd"),
+    "Ano-Mês", FORMAT([Date], "YYYY-MM"),
+    "Semana do Ano", WEEKNUM([Date], 2)
+)
+                    </div>
+                    <div class="info-box note">📌 Depois de criar a tabela, marca-a como "Date Table" em: Table Tools → Mark as Date Table → seleciona a coluna de data.</div>
+                </div>
+
+                <div class="card">
+                    <h3>⚙️ Boas Práticas de Modelação</h3>
+                    <ul>
+                        <li><strong>Usa sempre esquema em estrela</strong> — evita relações entre tabelas de factos.</li>
+                        <li><strong>Esconde colunas-chave (IDs)</strong> — o utilizador não precisa de ver ID_Produto nos visuais.</li>
+                        <li><strong>Cria hierarquias</strong> — ex: Ano → Trimestre → Mês → Dia na tabela de datas.</li>
+                        <li><strong>Evita relações bidirecionais</strong> — só usa cross-filter "Both" quando estritamente necessário.</li>
+                        <li><strong>Minimiza colunas calculadas</strong> — prefere medidas DAX (calculadas em tempo de query).</li>
+                        <li><strong>Remove tabelas desnecessárias</strong> — tudo o que não é usado desperdiça memória.</li>
+                        <li><strong>Organiza as medidas</strong> numa tabela separada (ex: "_Medidas") para manter tudo limpo.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>✅ Tarefas do Módulo 3</h3>
+                    <div class="checklist" data-module="modulo3">
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Abrir o Model View e examinar as relações automáticas</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Criar um esquema em estrela com pelo menos 1 facto e 3 dimensões</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Criar uma tabela de datas com DAX (CALENDARAUTO)</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Marcar a tabela de datas como "Date Table"</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Esconder colunas-chave (IDs) das vistas de relatório</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Criar uma hierarquia de datas (Ano > Trimestre > Mês)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                    <button class="btn btn-secondary" onclick="navigateTo('modulo2')">← Módulo 2</button>
+                    <button class="btn btn-primary" onclick="navigateTo('modulo4')">Próximo: DAX →</button>
+                </div>
+            </div>
+
+            <!-- ========== MÓDULO 4: DAX ========== -->
+            <div class="section-page" id="page-modulo4">
+                <h2 class="section-title">🧮 Módulo 4: DAX (Data Analysis Expressions)</h2>
+                <p class="section-subtitle">Domina a linguagem de fórmulas do Power BI para criar medidas e colunas calculadas.</p>
+
+                <div class="card">
+                    <h3>🔍 O que é DAX?</h3>
+                    <p><strong>DAX</strong> (Data Analysis Expressions) é a linguagem de fórmulas do Power BI. É semelhante às fórmulas do Excel, mas muito mais poderosa pois opera sobre tabelas e colunas inteiras, compreendendo o contexto de filtro dos visuais.</p>
+                    <div class="info-box note">📌 DAX é usado para criar <strong>Medidas</strong> (calculadas em tempo de execução) e <strong>Colunas Calculadas</strong> (calculadas ao carregar os dados). Prefere sempre medidas quando possível.</div>
+                </div>
+
+                <div class="card">
+                    <h3>📐 Medida vs Coluna Calculada</h3>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th>Medida</th>
+                                <th>Coluna Calculada</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Quando calcula</strong></td>
+                                <td>Em tempo de query (dinâmica)</td>
+                                <td>Ao carregar/atualizar dados</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Memória</strong></td>
+                                <td>Não ocupa espaço extra</td>
+                                <td>Ocupa espaço no modelo</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Contexto de filtro</strong></td>
+                                <td>Reage aos filtros e slicers</td>
+                                <td>Valor fixo por linha</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Uso típico</strong></td>
+                                <td>Agregações, KPIs, ratios</td>
+                                <td>Categorização, colunas derivadas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Recomendação</strong></td>
+                                <td>⭐ Usar sempre que possível</td>
+                                <td>Usar só quando necessário</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>📊 Funções DAX Essenciais</h3>
+
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>📈 Funções de Agregação</span>
+                                <span class="arrow">▼</span>
+                            </div>
+                            <div class="accordion-body">
+                                <div class="code-block">
+// Soma total de vendas
+Total Vendas = SUM(FactVendas[Valor])
+
+// Contagem de linhas
+Nº Transações = COUNTROWS(FactVendas)
+
+// Contagem de valores distintos
+Nº Clientes = DISTINCTCOUNT(FactVendas[ClienteID])
+
+// Média
+Ticket Médio = AVERAGE(FactVendas[Valor])
+
+// Mínimo e Máximo
+Primeira Venda = MIN(FactVendas[Data])
+Última Venda = MAX(FactVendas[Data])
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>🔧 CALCULATE — A função mais importante</span>
+                                <span class="arrow">▼</span>
+                            </div>
+                            <div class="accordion-body">
+                                <p><strong>CALCULATE</strong> modifica o contexto de filtro de uma expressão. É a função mais poderosa e usada em DAX.</p>
+                                <div class="code-block">
+// Vendas filtradas por categoria
+Vendas Eletrónicos = 
+CALCULATE(
+    SUM(FactVendas[Valor]),
+    DimProduto[Categoria] = "Eletrónicos"
+)
+
+// Vendas do ano anterior
+Vendas Ano Anterior = 
+CALCULATE(
+    [Total Vendas],
+    SAMEPERIODLASTYEAR(DimCalendario[Date])
+)
+
+// Vendas acumuladas no ano (YTD)
+Vendas YTD = 
+CALCULATE(
+    [Total Vendas],
+    DATESYTD(DimCalendario[Date])
+)
+
+// Remover todos os filtros de uma tabela
+Vendas Totais Sem Filtro = 
+CALCULATE(
+    [Total Vendas],
+    ALL(DimProduto)
+)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>📅 Time Intelligence (Análise Temporal)</span>
+                                <span class="arrow">▼</span>
+                            </div>
+                            <div class="accordion-body">
+                                <p>Requerem uma tabela de datas marcada corretamente.</p>
+                                <div class="code-block">
+// Acumulado no ano
+Vendas YTD = TOTALYTD([Total Vendas], DimCalendario[Date])
+
+// Acumulado no mês
+Vendas MTD = TOTALMTD([Total Vendas], DimCalendario[Date])
+
+// Mesmo período do ano passado
+Vendas LY = 
+CALCULATE([Total Vendas], SAMEPERIODLASTYEAR(DimCalendario[Date]))
+
+// Variação percentual vs ano anterior
+Var% YoY = 
+VAR _atual = [Total Vendas]
+VAR _anterior = [Vendas LY]
+RETURN
+    IF(_anterior = 0, BLANK(), DIVIDE(_atual - _anterior, _anterior))
+
+// Últimos 30 dias
+Vendas Últimos 30d = 
+CALCULATE(
+    [Total Vendas],
+    DATESINPERIOD(DimCalendario[Date], MAX(DimCalendario[Date]), -30, DAY)
+)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>🧩 Funções de Tabela e Iteração</span>
+                                <span class="arrow">▼</span>
+                            </div>
+                            <div class="accordion-body">
+                                <div class="code-block">
+// SUMX — soma iterativa (linha a linha)
+Receita Total = 
+SUMX(
+    FactVendas,
+    FactVendas[Quantidade] * FactVendas[PreçoUnitário]
+)
+
+// FILTER — filtra uma tabela
+Vendas Grandes = 
+CALCULATE(
+    COUNTROWS(FactVendas),
+    FILTER(FactVendas, FactVendas[Valor] > 1000)
+)
+
+// RANKX — ranking
+Rank Produto = 
+RANKX(
+    ALL(DimProduto[NomeProduto]),
+    [Total Vendas],
+    ,
+    DESC,
+    Dense
+)
+
+// TOPN — top N resultados
+Top 5 Produtos = 
+CONCATENATEX(
+    TOPN(5, ALL(DimProduto[NomeProduto]), [Total Vendas], DESC),
+    DimProduto[NomeProduto],
+    ", "
+)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>🔀 Funções Lógicas e Texto</span>
+                                <span class="arrow">▼</span>
+                            </div>
+                            <div class="accordion-body">
+                                <div class="code-block">
+// IF — condicional
+Classificação = 
+IF([Total Vendas] > 100000, "Alto", 
+    IF([Total Vendas] > 50000, "Médio", "Baixo"))
+
+// SWITCH — múltiplas condições (mais limpo que IF encadeado)
+Segmento = 
+SWITCH(TRUE(),
+    [Total Vendas] > 100000, "🟢 Premium",
+    [Total Vendas] > 50000, "🟡 Standard",
+    [Total Vendas] > 10000, "🟠 Básico",
+    "🔴 Baixo"
+)
+
+// DIVIDE — divisão segura (evita erro de divisão por zero)
+Margem % = DIVIDE([Lucro], [Receita], 0)
+
+// FORMAT — formatar valores
+Vendas Formatadas = FORMAT([Total Vendas], "#,##0.00 €")
+
+// CONCATENATE / operador &
+Nome Completo = DimCliente[Nome] & " " & DimCliente[Apelido]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>💡 Boas Práticas em DAX</h3>
+                    <ul>
+                        <li><strong>Usa variáveis (VAR):</strong> Tornam o código legível e evitam recalcular expressões.</li>
+                        <li><strong>Usa DIVIDE() em vez de /:</strong> Evita erros de divisão por zero.</li>
+                        <li><strong>Prefere medidas a colunas calculadas:</strong> São mais eficientes e reativas aos filtros.</li>
+                        <li><strong>Organiza medidas numa pasta:</strong> Cria uma tabela vazia "_Medidas" e agrupa-as por categoria.</li>
+                        <li><strong>Formata o código:</strong> Usa indentação e quebras de linha para DAX complexo. Experimenta o site daxformatter.com.</li>
+                        <li><strong>Testa com tabelas e cards simples:</strong> Antes de usar numa visualização complexa, verifica o resultado num Card ou Table simples.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>✅ Tarefas do Módulo 4</h3>
+                    <div class="checklist" data-module="modulo4">
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Criar medidas básicas: SUM, COUNT, AVERAGE, DISTINCTCOUNT</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Usar CALCULATE para filtrar uma medida por dimensão</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Criar medidas de Time Intelligence (YTD, LY, Var%)</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Usar SWITCH para categorização dinâmica</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Criar um ranking de produtos com RANKX</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Organizar todas as medidas numa tabela "_Medidas"</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Formatar uma expressão DAX complexa no daxformatter.com</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                    <button class="btn btn-secondary" onclick="navigateTo('modulo3')">← Módulo 3</button>
+                    <button class="btn btn-primary" onclick="navigateTo('modulo5')">Próximo: Visualizações →</button>
+                </div>
+            </div>
+
+            <!-- ========== MÓDULO 5: VISUALIZAÇÕES ========== -->
+            <div class="section-page" id="page-modulo5">
+                <h2 class="section-title">📈 Módulo 5: Visualizações</h2>
+                <p class="section-subtitle">Cria dashboards profissionais e interativos com as melhores práticas de visualização de dados.</p>
+
+                <div class="card">
+                    <h3>🔍 Princípios de Boa Visualização</h3>
+                    <p>Um bom dashboard não é apenas bonito — é <strong>funcional, claro e orientado à decisão</strong>. Segue estes princípios fundamentais:</p>
+                    <ul>
+                        <li><strong>Menos é mais:</strong> Evita sobrecarregar a página. 5-8 visuais por página é o ideal.</li>
+                        <li><strong>Hierarquia visual:</strong> O KPI mais importante deve estar no topo-esquerda (onde o olho vai primeiro).</li>
+                        <li><strong>Consistência:</strong> Usa as mesmas cores para representar as mesmas categorias em todo o relatório.</li>
+                        <li><strong>Contexto:</strong> Todos os números devem ter unidades, títulos descritivos e período temporal.</li>
+                        <li><strong>Acessibilidade:</strong> Usa cores acessíveis para daltónicos. Evita vermelho/verde juntos.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>📊 Quando Usar Cada Visual</h3>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Visual</th>
+                                <th>Melhor Para</th>
+                                <th>Exemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Card</strong></td>
+                                <td>Mostrar um único KPI</td>
+                                <td>Total de vendas, nº de clientes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gráfico de Barras</strong></td>
+                                <td>Comparar categorias</td>
+                                <td>Vendas por região</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gráfico de Linhas</strong></td>
+                                <td>Mostrar tendências ao longo do tempo</td>
+                                <td>Evolução mensal de receita</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gráfico de Colunas Empilhadas</strong></td>
+                                <td>Comparar partes de um todo ao longo de categorias</td>
+                                <td>Vendas por produto e região</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gráfico Circular / Donut</strong></td>
+                                <td>Mostrar proporções (max 5-6 fatias)</td>
+                                <td>Quota de mercado</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tabela / Matriz</strong></td>
+                                <td>Detalhes e drill-down</td>
+                                <td>Lista de transações, pivot tables</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mapa</strong></td>
+                                <td>Dados geográficos</td>
+                                <td>Vendas por país/cidade</td>
+                            </tr>
+                            <tr>
+                                <td><strong>KPI Visual</strong></td>
+                                <td>Mostrar progresso vs objetivo</td>
+                                <td>Vendas atuais vs meta</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gauge</strong></td>
+                                <td>Mostrar valor numa escala</td>
+                                <td>% de objetivo atingido</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Treemap</strong></td>
+                                <td>Hierarquias com proporções</td>
+                                <td>Vendas por categoria > subcategoria</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Scatter Plot</strong></td>
+                                <td>Correlação entre 2 métricas</td>
+                                <td>Preço vs Quantidade vendida</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>🎨 Formatação e Design</h3>
+                    <ul>
+                        <li><strong>Tema personalizado:</strong> Vai a View → Themes → Customize para definir cores, fontes e estilos globais. Podes importar um ficheiro .json de tema.</li>
+                        <li><strong>Fundo da página:</strong> Usa um wallpaper ou fundo com opacidade reduzida para dar profundidade.</li>
+                        <li><strong>Títulos dinâmicos:</strong> Usa medidas DAX nos títulos para que mudem conforme os filtros selecionados.</li>
+                        <li><strong>Ícones e imagens:</strong> Adiciona o logo da empresa e ícones para melhorar a identidade visual.</li>
+                        <li><strong>Bordas e sombras:</strong> Ativa bordas arredondadas e sombras subtis nos visuais para um look moderno.</li>
+                    </ul>
+                    <div class="code-block">
+                        <span class="code-label">DAX — Título Dinâmico</span>
+Título Dinâmico = 
+VAR _regiao = SELECTEDVALUE(DimLoja[Região], "Todas as Regiões")
+VAR _ano = SELECTEDVALUE(DimCalendario[Ano], "Todos os Anos")
+RETURN
+    "Vendas — " & _regiao & " — " & _ano
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🔘 Interatividade</h3>
+                    <p>O Power BI permite criar experiências interativas poderosas:</p>
+                    <ul>
+                        <li><strong>Slicers (Segmentadores):</strong> Filtros visuais que o utilizador pode manipular. Usa slicers de data, dropdown e lista.</li>
+                        <li><strong>Cross-filtering:</strong> Ao clicar num visual, os outros reagem. Configura em Format → Edit Interactions.</li>
+                        <li><strong>Drill-through:</strong> Permite navegar para uma página de detalhe ao clicar com botão direito num ponto de dados.</li>
+                        <li><strong>Bookmarks:</strong> Guarda estados de filtros e navegação. Útil para criar menus e navegação entre páginas.</li>
+                        <li><strong>Tooltips personalizados:</strong> Cria uma página-tooltip com visuais que aparecem ao passar o rato sobre um ponto de dados.</li>
+                        <li><strong>Botões de navegação:</strong> Adiciona botões para navegar entre páginas do relatório.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>🏗️ Layout Sugerido de Dashboard</h3>
+                    <div class="code-block">
+                        <span class="code-label">Estrutura Recomendada</span>
+┌──────────────────────────────────────────────────┐
+│  CABEÇALHO: Logo + Título + Slicers de Data      │
+├──────────┬──────────┬──────────┬─────────────────┤
+│  Card    │  Card    │  Card    │  Card           │
+│  KPI 1   │  KPI 2   │  KPI 3   │  KPI 4         │
+├──────────┴──────────┼──────────┴─────────────────┤
+│                     │                             │
+│  Gráfico Linhas     │  Gráfico Barras            │
+│  (Tendência)        │  (Top Categorias)          │
+│                     │                             │
+├─────────────────────┼─────────────────────────────┤
+│                     │                             │
+│  Mapa / Donut       │  Tabela / Matriz           │
+│  (Distribuição)     │  (Detalhes)                │
+│                     │                             │
+└─────────────────────┴─────────────────────────────┘
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>✅ Tarefas do Módulo 5</h3>
+                    <div class="checklist" data-module="modulo5">
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Criar uma página com Cards de KPI no topo</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Adicionar um gráfico de linhas com tendência temporal</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Criar um gráfico de barras para comparação de categorias</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Adicionar slicers de data e categoria</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Configurar Edit Interactions entre visuais</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Aplicar um tema personalizado ao relatório</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Criar uma tooltip personalizada com visuais</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Implementar drill-through para uma página de detalhe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                    <button class="btn btn-secondary" onclick="navigateTo('modulo4')">← Módulo 4</button>
+                    <button class="btn btn-primary" onclick="navigateTo('modulo6')">Próximo: Publicação →</button>
+                </div>
+            </div>
+
+            <!-- ========== MÓDULO 6: PUBLICAÇÃO E PARTILHA ========== -->
+            <div class="section-page" id="page-modulo6">
+                <h2 class="section-title">🚀 Módulo 6: Publicação e Partilha</h2>
+                <p class="section-subtitle">Publica os teus relatórios no Power BI Service e partilha-os com a equipa.</p>
+
+                <div class="card">
+                    <h3>🔍 Do Desktop para a Cloud</h3>
+                    <p>Depois de criares o relatório no Power BI Desktop, o passo seguinte é publicá-lo no <strong>Power BI Service</strong> (app.powerbi.com) para que outros possam aceder, interagir e colaborar.</p>
+                    <div class="info-box note">📌 Precisas de uma conta organizacional (email corporativo ou educacional) com licença Power BI Pro ou Premium Per User para publicar e partilhar.</div>
+                </div>
+
+                <div class="card">
+                    <h3>📤 Como Publicar</h3>
+                    <p>O processo de publicação é simples e direto:</p>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Passo</th>
+                                <th>Ação</th>
+                                <th>Detalhes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1</strong></td>
+                                <td>Guardar o ficheiro .pbix</td>
+                                <td>Ctrl+S — garante que todas as alterações estão guardadas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2</strong></td>
+                                <td>Clicar em "Publish"</td>
+                                <td>Home → Publish (canto superior direito)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3</strong></td>
+                                <td>Escolher o Workspace</td>
+                                <td>Seleciona o workspace de destino (ex: "My Workspace" ou um workspace partilhado)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4</strong></td>
+                                <td>Aguardar o upload</td>
+                                <td>O ficheiro é carregado para a cloud da Microsoft</td>
+                            </tr>
+                            <tr>
+                                <td><strong>5</strong></td>
+                                <td>Abrir no browser</td>
+                                <td>Clica no link para abrir o relatório no Power BI Service</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>🏢 Workspaces</h3>
+                    <p>Os <strong>Workspaces</strong> são espaços de colaboração no Power BI Service onde equipas partilham relatórios, datasets e dashboards.</p>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Descrição</th>
+                                <th>Uso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>My Workspace</strong></td>
+                                <td>Espaço pessoal, só tu vês</td>
+                                <td>Testes e desenvolvimento pessoal</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Workspace Partilhado</strong></td>
+                                <td>Espaço de equipa com roles</td>
+                                <td>Colaboração e partilha com a equipa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="margin-top:12px;">Roles disponíveis num workspace:</p>
+                    <ul>
+                        <li><strong>Admin:</strong> Controlo total — gerir membros, eliminar conteúdo, publicar apps.</li>
+                        <li><strong>Member:</strong> Pode publicar e editar conteúdo, mas não gerir membros.</li>
+                        <li><strong>Contributor:</strong> Pode criar e editar conteúdo, mas não publicar apps.</li>
+                        <li><strong>Viewer:</strong> Apenas pode visualizar — sem edição.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>📊 Dashboards vs Relatórios no Service</h3>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th>Relatório (Report)</th>
+                                <th>Dashboard</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Origem</strong></td>
+                                <td>Criado no Power BI Desktop</td>
+                                <td>Criado no Power BI Service</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Páginas</strong></td>
+                                <td>Múltiplas páginas</td>
+                                <td>Página única com tiles (pins)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fontes</strong></td>
+                                <td>Um único dataset</td>
+                                <td>Pode combinar tiles de múltiplos relatórios</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Interatividade</strong></td>
+                                <td>Cross-filtering, slicers, drill-through</td>
+                                <td>Clique leva ao relatório de origem</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Alertas</strong></td>
+                                <td>Não disponível</td>
+                                <td>Pode configurar alertas em cards numéricos</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>🔄 Atualização de Dados</h3>
+                    <p>Depois de publicar, podes configurar a atualização automática dos dados:</p>
+                    <ul>
+                        <li><strong>Scheduled Refresh:</strong> Agenda atualizações até 8x por dia (Pro) ou 48x por dia (Premium).</li>
+                        <li><strong>Gateway:</strong> Se os dados estão on-premises (ex: SQL Server local), precisas instalar o <strong>On-premises Data Gateway</strong> para que o Service consiga aceder à fonte.</li>
+                        <li><strong>DirectQuery:</strong> Em vez de importar, consulta os dados em tempo real. Útil para dados muito grandes ou que mudam constantemente.</li>
+                    </ul>
+                    <div class="info-box tip">✅ <strong>Dica:</strong> Para configurar o refresh, vai ao workspace → Dataset → Settings → Scheduled Refresh.</div>
+                </div>
+
+                <div class="card">
+                    <h3>📱 Formas de Partilha</h3>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Método</th>
+                                <th>Descrição</th>
+                                <th>Quando usar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Partilha direta</strong></td>
+                                <td>Envia link por email para utilizadores específicos</td>
+                                <td>Partilha rápida com 1-2 pessoas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>App</strong></td>
+                                <td>Empacota relatórios e dashboards numa "app" publicável</td>
+                                <td>Distribuição organizada para muitos utilizadores</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Embed</strong></td>
+                                <td>Incorpora o relatório num website ou portal</td>
+                                <td>Disponibilizar relatórios em intranets ou apps web</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Publish to Web</strong></td>
+                                <td>Gera um link público (sem autenticação)</td>
+                                <td>⚠️ Apenas para dados públicos — qualquer pessoa pode aceder</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Exportar</strong></td>
+                                <td>Exporta para PDF, PowerPoint ou Excel</td>
+                                <td>Partilha estática com quem não tem Power BI</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="info-box warning">⚠️ <strong>Atenção:</strong> "Publish to Web" torna o relatório público na internet. Nunca uses com dados sensíveis ou confidenciais.</div>
+                </div>
+
+                <div class="card">
+                    <h3>🔒 Row-Level Security (RLS)</h3>
+                    <p>O RLS permite restringir quais dados cada utilizador vê, com base em regras definidas no modelo:</p>
+                    <div class="code-block">
+                        <span class="code-label">DAX — Regra RLS por Região</span>
+// Criada em Modeling → Manage Roles → New Role
+// Tabela: DimLoja
+// Expressão de filtro:
+[Região] = USERPRINCIPALNAME()
+
+// Ou para um utilizador específico:
+[Região] = "Norte"
+                    </div>
+                    <p style="margin-top:8px;">Depois de definir os roles, atribui utilizadores a cada role no Power BI Service (workspace → Dataset → Security).</p>
+                </div>
+
+                <div class="card">
+                    <h3>✅ Tarefas do Módulo 6</h3>
+                    <div class="checklist" data-module="modulo6">
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Publicar um relatório no Power BI Service</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Criar um workspace partilhado e convidar um colega</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Pintar tiles de um relatório num Dashboard</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Configurar o Scheduled Refresh para o dataset</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Partilhar o relatório via link direto</span>
+                        </div>
+                        <div class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="check-box"></div>
+                            <span class="check-text">Configurar pelo menos uma regra de RLS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                    <button class="btn btn-secondary" onclick="navigateTo('modulo5')">← Módulo 5</button>
+                    <button class="btn btn-primary" onclick="navigateTo('exercicios')">Próximo: Exercícios →</button>
+                </div>
+            </div>
+
+            <!-- ========== EXERCÍCIOS PRÁTICOS ========== -->
+            <div class="section-page" id="page-exercicios">
+                <h2 class="section-title">🏋️ Exercícios Práticos</h2>
+                <p class="section-subtitle">Põe em prática o que aprendeste com estes desafios progressivos.</p>
+
+                <div class="card">
+                    <h3>🟢 Exercício 1 — Relatório de Vendas Básico</h3>
+                    <p><strong>Nível:</strong> Iniciante &nbsp;|&nbsp; <strong>Módulos:</strong> 1, 2, 5</p>
+                    <div class="info-box tip">
+                        <strong>Objetivo:</strong> Criar um relatório simples com dados de vendas.
+                    </div>
+                    <p><strong>Passos:</strong></p>
+                    <ol>
+                        <li>Descarrega o ficheiro de exemplo "Contoso Sales" da Microsoft (ou usa um Excel com dados de vendas).</li>
+                        <li>Importa os dados no Power BI Desktop.</li>
+                        <li>No Power Query: remove colunas desnecessárias, verifica tipos de dados, filtra valores nulos.</li>
+                        <li>Cria uma página com: 3 Cards (Total Vendas, Nº Transações, Ticket Médio), 1 Gráfico de Linhas (vendas por mês), 1 Gráfico de Barras (vendas por categoria).</li>
+                        <li>Adiciona um slicer de data.</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h3>🟡 Exercício 2 — Modelo em Estrela + DAX</h3>
+                    <p><strong>Nível:</strong> Intermédio &nbsp;|&nbsp; <strong>Módulos:</strong> 3, 4</p>
+                    <div class="info-box tip">
+                        <strong>Objetivo:</strong> Estruturar um modelo em estrela e criar medidas DAX avançadas.
+                    </div>
+                    <p><strong>Passos:</strong></p>
+                    <ol>
+                        <li>Usa pelo menos 4 tabelas: FactVendas, DimProduto, DimCliente, DimCalendario.</li>
+                        <li>Cria a tabela DimCalendario com DAX (CALENDARAUTO + ADDCOLUMNS).</li>
+                        <li>Estabelece relações 1:N entre dimensões e facto.</li>
+                        <li>Cria estas medidas: Total Vendas, Vendas YTD, Vendas LY, Variação % YoY, Rank de Produto.</li>
+                        <li>Organiza as medidas numa tabela "_Medidas".</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h3>🔴 Exercício 3 — Dashboard Profissional Completo</h3>
+                    <p><strong>Nível:</strong> Avançado &nbsp;|&nbsp; <strong>Módulos:</strong> Todos</p>
+                    <div class="info-box tip">
+                        <strong>Objetivo:</strong> Criar um dashboard completo, profissional e publicá-lo.
+                    </div>
+                    <p><strong>Passos:</strong></p>
+                    <ol>
+                        <li>Importa dados de pelo menos 2 fontes diferentes (ex: Excel + CSV).</li>
+                        <li>Aplica transformações completas no Power Query (merge, unpivot, colunas calculadas).</li>
+                        <li>Estrutura um modelo em estrela com pelo menos 4 dimensões.</li>
+                        <li>Cria pelo menos 10 medidas DAX (incluindo Time Intelligence e RANKX).</li>
+                        <li>Desenha um dashboard com 3 páginas: Resumo Executivo, Análise Detalhada, Detalhe por Cliente.</li>
+                        <li>Implementa: tema personalizado, drill-through, tooltips personalizados, bookmarks para navegação.</li>
+                        <li>Configura pelo menos uma regra de RLS.</li>
+                        <li>Publica no Power BI Service e partilha com um colega.</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h3>🌐 Dados de Exemplo para Praticar</h3>
+                    <ul>
+                        <li><strong>Contoso Sales:</strong> Dataset oficial da Microsoft — pesquisa "Contoso Sales Power BI sample".</li>
+                        <li><strong>AdventureWorks:</strong> Base de dados clássica para BI — disponível no GitHub da Microsoft.</li>
+                        <li><strong>Kaggle:</strong> Milhares de datasets gratuitos em kaggle.com (ex: "Superstore Sales", "E-commerce Dataset").</li>
+                        <li><strong>data.gov / dados.gov.pt:</strong> Dados abertos de governos para projetos reais.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ========== QUIZ ========== -->
+            <div class="section-page" id="page-quiz">
+                <h2 class="section-title">❓ Quiz de Avaliação</h2>
+                <p class="section-subtitle">Testa os teus conhecimentos com 15 perguntas sobre todos os módulos.</p>
+
+                <div id="quiz-container">
+                    <div id="quiz-questions"></div>
+                    <div id="quiz-result" style="display:none;"></div>
+                    <div style="margin-top:20px; display:flex; gap:12px;">
+                        <button class="btn btn-primary" id="quiz-submit-btn" onclick="submitQuiz()">📝 Submeter Quiz</button>
+                        <button class="btn btn-secondary" id="quiz-retry-btn" onclick="retryQuiz()" style="display:none;">🔄 Tentar Novamente</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== GLOSSÁRIO ========== -->
+            <div class="section-page" id="page-glossario">
+                <h2 class="section-title">📖 Glossário</h2>
+                <p class="section-subtitle">Termos e conceitos essenciais do universo Power BI.</p>
+
+                <div class="card">
+                    <input type="text" id="glossary-search" placeholder="🔍 Pesquisar termo..." 
+                           oninput="filterGlossary(this.value)"
+                           style="width:100%; padding:12px 16px; border:2px solid var(--border); border-radius:10px; background:var(--bg-input); color:var(--text-primary); font-size:15px; margin-bottom:16px;">
+                    
+                    <div id="glossary-list">
+                        <div class="glossary-item">
+                            <strong>Append</strong>
+                            <p>Operação no Power Query que empilha (une verticalmente) duas ou mais tabelas com a mesma estrutura. Equivale ao UNION em SQL.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Bookmark</strong>
+                            <p>Funcionalidade que guarda um estado específico do relatório (filtros, visibilidade, página). Usado para criar navegação interativa.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>CALCULATE</strong>
+                            <p>Função DAX mais importante. Avalia uma expressão num contexto de filtro modificado. Sintaxe: CALCULATE(expressão, filtro1, filtro2, ...).</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Cardinalidade</strong>
+                            <p>Define o tipo de relação entre duas tabelas: 1:1, 1:N (um para muitos) ou N:N (muitos para muitos).</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Coluna Calculada</strong>
+                            <p>Coluna adicionada a uma tabela via DAX, calculada ao carregar os dados. O valor é fixo por linha e ocupa memória no modelo.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Contexto de Filtro</strong>
+                            <p>Conjunto de filtros ativos que determinam quais dados são visíveis para uma expressão DAX. Inclui filtros de visuais, slicers, página e relatório.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Cross-filtering</strong>
+                            <p>Comportamento onde a seleção num visual filtra automaticamente os outros visuais na mesma página. Configurável via Edit Interactions.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>DAX</strong>
+                            <p>Data Analysis Expressions — linguagem de fórmulas do Power BI para criar medidas, colunas calculadas e tabelas calculadas.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Dataset</strong>
+                            <p>Conjunto de dados publicado no Power BI Service. Contém tabelas, relações, medidas e metadados. Base para relatórios e dashboards.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>DirectQuery</strong>
+                            <p>Modo de conexão que consulta a fonte de dados em tempo real, sem importar. Útil para dados muito grandes ou que mudam frequentemente.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Drill-through</strong>
+                            <p>Funcionalidade que permite navegar de um visual para uma página de detalhe, passando o contexto de filtro do item clicado.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>ETL</strong>
+                            <p>Extract, Transform, Load — processo de extrair dados de fontes, transformá-los e carregá-los no destino. O Power Query é a ferramenta ETL do Power BI.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Esquema em Estrela</strong>
+                            <p>Padrão de modelação recomendado: uma tabela de factos central rodeada por tabelas de dimensão ligadas por relações 1:N.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Gateway</strong>
+                            <p>Software que permite ao Power BI Service aceder a dados on-premises (dentro da rede da empresa). Necessário para scheduled refresh de fontes locais.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Implicit Measure</strong>
+                            <p>Agregação automática criada pelo Power BI ao arrastar um campo numérico para um visual. Recomenda-se substituir por medidas explícitas.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Linguagem M</strong>
+                            <p>Power Query Formula Language — linguagem funcional usada pelo Power Query. Cada transformação gera código M nos bastidores.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Medida (Measure)</strong>
+                            <p>Cálculo DAX avaliado em tempo de query. Reage ao contexto de filtro e não ocupa espaço extra no modelo. Preferível a colunas calculadas.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Merge</strong>
+                            <p>Operação no Power Query que junta duas tabelas por uma coluna-chave comum. Equivale ao JOIN em SQL.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>RLS (Row-Level Security)</strong>
+                            <p>Mecanismo de segurança que filtra os dados visíveis por utilizador com base em regras DAX definidas no modelo.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Scheduled Refresh</strong>
+                            <p>Agendamento automático de atualização de dados no Power BI Service. Até 8x/dia (Pro) ou 48x/dia (Premium).</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Slicer</strong>
+                            <p>Visual de filtro interativo que permite ao utilizador selecionar valores para filtrar os dados na página ou relatório.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Tabela de Factos</strong>
+                            <p>Tabela central do modelo que contém transações/eventos (dados numéricos). Tem muitas linhas e chaves estrangeiras para as dimensões.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Tabela de Dimensão</strong>
+                            <p>Tabela descritiva que dá contexto aos factos. Contém atributos como nomes, categorias, datas e localizações.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Time Intelligence</strong>
+                            <p>Conjunto de funções DAX para análise temporal: YTD, MTD, QTD, SAMEPERIODLASTYEAR, DATESINPERIOD, etc. Requer tabela de datas marcada.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Tooltip</strong>
+                            <p>Informação que aparece ao passar o rato sobre um ponto de dados. Pode ser personalizada com uma página dedicada contendo visuais.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Unpivot</strong>
+                            <p>Transformação no Power Query que converte colunas em linhas. Útil para normalizar dados que estão em formato "wide" (ex: meses como colunas).</p>
+                        </div>
+                        <div class="glossary-item">
+                            <strong>Workspace</strong>
+                            <p>Espaço colaborativo no Power BI Service onde equipas organizam e partilham relatórios, datasets e dashboards.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== RECURSOS ÚTEIS ========== -->
+            <div class="section-page" id="page-recursos">
+                <h2 class="section-title">🔗 Recursos Úteis</h2>
+                <p class="section-subtitle">Links, canais e materiais recomendados para aprofundar os teus conhecimentos.</p>
+
+                <div class="card">
+                    <h3>📚 Documentação Oficial</h3>
+                    <ul>
+                        <li><strong>Microsoft Learn — Power BI:</strong> learn.microsoft.com/power-bi — Documentação completa e learning paths gratuitos.</li>
+                        <li><strong>DAX Guide:</strong> dax.guide — Referência completa de todas as funções DAX com exemplos.</li>
+                        <li><strong>DAX Formatter:</strong> daxformatter.com — Formata código DAX automaticamente.</li>
+                        <li><strong>DAX Patterns:</strong> daxpatterns.com — Padrões DAX prontos a usar (por Alberto Ferrari e Marco Russo).</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>🎥 Canais YouTube Recomendados</h3>
+                    <ul>
+                        <li><strong>Guy in a Cube:</strong> Dicas semanais dos MVPs Adam Saxton e Patrick LeBlanc.</li>
+                        <li><strong>SQLBI:</strong> Alberto Ferrari e Marco Russo — os maiores especialistas mundiais em DAX.</li>
+                        <li><strong>Curbal:</strong> Tutoriais práticos e acessíveis por Ruth Pozuelo Martinez.</li>
+                        <li><strong>How to Power BI:</strong> Tutoriais em português (brasileiro) por Karine Lago.</li>
+                        <li><strong>Hashtagtreinamentos:</strong> Conteúdo em português (brasileiro) muito completo.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>📖 Livros Recomendados</h3>
+                    <ul>
+                        <li><strong>"The Definitive Guide to DAX"</strong> — Alberto Ferrari & Marco Russo (a bíblia do DAX).</li>
+                        <li><strong>"Power BI — Da análise de dados ao Business Intelligence"</strong> — em português.</li>
+                        <li><strong>"Storytelling with Data"</strong> — Cole Nussbaumer Knaflic (boas práticas de visualização).</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>🏅 Certificações Microsoft</h3>
+                    <ul>
+                        <li><strong>PL-300:</strong> Microsoft Power BI Data Analyst — a certificação oficial. Abrange todos os tópicos deste guia.</li>
+                        <li><strong>DP-600:</strong> Fabric Analytics Engineer Associate — certificação mais avançada para Microsoft Fabric.</li>
+                    </ul>
+                    <div class="info-box tip">✅ A certificação PL-300 é uma excelente forma de validar os teus conhecimentos e destacar o teu CV.</div>
+                </div>
+
+                <div class="card">
+                    <h3>🌐 Comunidade</h3>
+                    <ul>
+                        <li><strong>Power BI Community:</strong> community.powerbi.com — Fórum oficial da Microsoft.</li>
+                        <li><strong>Reddit r/PowerBI:</strong> Comunidade ativa com dicas e Q&A.</li>
+                        <li><strong>LinkedIn:</strong> Segue hashtags como #PowerBI, #DAX, #BusinessIntelligence.</li>
+                        <li><strong>Power BI User Groups:</strong> Grupos locais com meetups presenciais e online.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ========== NOTAS PESSOAIS ========== -->
+            <div class="section-page" id="page-notas">
+                <h2 class="section-title">📝 Notas Pessoais</h2>
+                <p class="section-subtitle">Regista as tuas aprendizagens, dúvidas e descobertas durante o estágio.</p>
+
+                <div class="card">
+                    <div class="info-box tip">✅ As notas são guardadas automaticamente no teu browser (localStorage). Recomendamos copiar para outro local periodicamente.</div>
+                    
+                    <textarea id="personal-notes" 
+                              placeholder="Escreve aqui as tuas notas, dúvidas, descobertas e aprendizagens durante o estágio...
+
+Exemplo:
+📅 Semana 1:
+- Instalei o Power BI Desktop
+- Descobri que CTRL+Enter executa o Power Query
+- Dúvida: como funciona o CALCULATE com múltiplos filtros?
+
+📅 Semana 2:
+- Criei o meu primeiro modelo em estrela
+- O esquema em estrela melhorou a performance do relatório
+..."
+                              oninput="saveNotes()"
+                              style="width:100%; min-height:400px; padding:16px; border:2px solid var(--border); border-radius:10px; background:var(--bg-input); color:var(--text-primary); font-family:'Inter',sans-serif; font-size:14px; line-height:1.8; resize:vertical;"></textarea>
+                    
+                    <div style="display:flex; gap:12px; margin-top:16px;">
+                        <button class="btn btn-primary" onclick="exportNotes()">📥 Exportar Notas (.txt)</button>
+                        <button class="btn btn-secondary" onclick="clearNotes()">🗑️ Limpar Notas</button>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /content-area -->
+    </main>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // ===== DADOS DO QUIZ =====
+        const quizData = [
+            {
+                q: "1. O que é o Power BI Desktop?",
+                options: [
+                    "Um serviço cloud para partilha de relatórios",
+                    "Uma aplicação gratuita para criação de relatórios e modelos de dados",
+                    "Uma base de dados relacional",
+                    "Um plugin para Excel"
+                ],
+                correct: 1
+            },
+            {
+                q: "2. Qual é a ferramenta de ETL integrada no Power BI?",
+                options: ["DAX Studio", "Power Query", "SQL Server", "Power Automate"],
+                correct: 1
+            },
+            {
+                q: "3. O que faz a transformação 'Unpivot' no Power Query?",
+                options: [
+                    "Junta duas tabelas por chave",
+                    "Remove linhas duplicadas",
+                    "Converte colunas em linhas (normaliza dados wide)",
+                    "Ordena os dados por uma coluna"
+                ],
+                correct: 2
+            },
+            {
+                q: "4. Qual é o padrão de modelação recomendado no Power BI?",
+                options: ["Snowflake Schema", "Flat Table", "Star Schema (Esquema em Estrela)", "Network Model"],
+                correct: 2
+            },
+            {
+                q: "5. Numa relação 1:N, qual tabela tem a chave primária?",
+                options: [
+                    "A tabela de factos",
+                    "A tabela de dimensão (lado '1')",
+                    "Ambas as tabelas",
+                    "Nenhuma — é automático"
+                ],
+                correct: 1
+            },
+            {
+                q: "6. Qual é a principal diferença entre uma Medida e uma Coluna Calculada?",
+                options: [
+                    "As medidas usam M e as colunas usam DAX",
+                    "As medidas são calculadas em tempo de query; as colunas ao carregar os dados",
+                    "Não há diferença — são sinónimos",
+                    "As colunas calculadas reagem aos filtros; as medidas não"
+                ],
+                correct: 1
+            },
+            {
+                q: "7. Qual função DAX modifica o contexto de filtro?",
+                options: ["SUM", "FILTER", "CALCULATE", "SUMX"],
+                correct: 2
+            },
+            {
+                q: "8. O que faz a função SAMEPERIODLASTYEAR?",
+                options: [
+                    "Calcula o acumulado do ano",
+                    "Devolve o mesmo período do ano anterior",
+                    "Filtra os últimos 12 meses",
+                    "Compara dois períodos quaisquer"
+                ],
+                correct: 1
+            },
+            {
+                q: "9. Para usar funções de Time Intelligence, o que é obrigatório?",
+                options: [
+                    "Ter dados de pelo menos 2 anos",
+                    "Usar DirectQuery",
+                    "Ter uma tabela de datas marcada como 'Date Table'",
+                    "Instalar um custom visual"
+                ],
+                correct: 2
+            },
+            {
+                q: "10. Quantos visuais por página é recomendado como ideal?",
+                options: ["1-2", "5-8", "15-20", "Sem limite"],
+                correct: 1
+            },
+            {
+                q: "11. Qual visual é mais adequado para mostrar tendências ao longo do tempo?",
+                options: ["Gráfico circular", "Gráfico de barras", "Gráfico de linhas", "Treemap"],
+                correct: 2
+            },
+            {
+                q: "12. O que é um Drill-through no Power BI?",
+                options: [
+                    "Uma animação de transição entre páginas",
+                    "Navegação para uma página de detalhe ao clicar num ponto de dados",
+                    "Um tipo de slicer avançado",
+                    "Uma função DAX para filtrar tabelas"
+                ],
+                correct: 1
+            },
+            {
+                q: "13. Qual é a diferença entre um Relatório e um Dashboard no Power BI Service?",
+                options: [
+                    "São exatamente a mesma coisa",
+                    "O relatório é criado no Desktop; o dashboard é criado no Service com tiles de múltiplas fontes",
+                    "O dashboard permite cross-filtering; o relatório não",
+                    "O relatório é público; o dashboard é privado"
+                ],
+                correct: 1
+            },
+            {
+                q: "14. O que é o RLS (Row-Level Security)?",
+                options: [
+                    "Uma forma de encriptar o ficheiro .pbix",
+                    "Um mecanismo para restringir dados visíveis por utilizador",
+                    "Uma configuração de firewall do Power BI Service",
+                    "Uma licença especial da Microsoft"
+                ],
+                correct: 1
+            },
+            {
+                q: "15. Que certificação Microsoft valida conhecimentos em Power BI?",
+                options: ["AZ-900", "PL-300", "DP-100", "MS-900"],
+                correct: 1
+            }
+        ];
+
+        // ===== ESTADO DA APLICAÇÃO =====
+        let currentPage = 'inicio';
+        let isDarkMode = false;
+        let checklistState = {};
+        let quizAnswers = {};
+        let quizSubmitted = false;
+
+        // ===== INICIALIZAÇÃO =====
+        document.addEventListener('DOMContentLoaded', function() {
+            loadState();
+            renderQuiz();
+            loadNotes();
+            updateProgress();
+            navigateTo(currentPage);
+            applyTheme();
+        });
+
+        // ===== NAVEGAÇÃO =====
+        function navigateTo(pageId) {
+            // Esconder todas as páginas
+            document.querySelectorAll('.section-page').forEach(p => {
+                p.classList.remove('active');
+            });
+
+            // Mostrar a página selecionada
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.add('active');
+                currentPage = pageId;
+                saveState();
+
+                // Scroll para o topo
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Atualizar item ativo na sidebar
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('data-page') === pageId) {
+                        item.classList.add('active');
+                    }
+                });
+
+                // Fechar sidebar em mobile
+                document.querySelector('.sidebar').classList.remove('open');
+            }
+        }
+
+        // ===== SIDEBAR MOBILE =====
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('open');
+        }
+
+        // ===== TEMA ESCURO/CLARO =====
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            applyTheme();
+            saveState();
+        }
+
+        function applyTheme() {
+            const root = document.documentElement;
+            const btn = document.getElementById('theme-toggle');
+            
+            if (isDarkMode) {
+                root.style.setProperty('--bg-primary', '#0f172a');
+                root.style.setProperty('--bg-secondary', '#1e293b');
+                root.style.setProperty('--bg-card', '#1e293b');
+                root.style.setProperty('--bg-sidebar', '#0f172a');
+                root.style.setProperty('--bg-input', '#334155');
+                root.style.setProperty('--text-primary', '#f1f5f9');
+                root.style.setProperty('--text-secondary', '#94a3b8');
+                root.style.setProperty('--text-muted', '#64748b');
+                root.style.setProperty('--border', '#334155');
+                root.style.setProperty('--shadow', '0 4px 20px rgba(0,0,0,0.4)');
+                root.style.setProperty('--info-bg', '#1e3a5f');
+                root.style.setProperty('--warning-bg', '#422006');
+                root.style.setProperty('--tip-bg', '#064e3b');
+                root.style.setProperty('--note-bg', '#312e81');
+                btn.textContent = '☀️ Claro';
+            } else {
+                root.style.setProperty('--bg-primary', '#f8fafc');
+                root.style.setProperty('--bg-secondary', '#ffffff');
+                root.style.setProperty('--bg-card', '#ffffff');
+                root.style.setProperty('--bg-sidebar', '#ffffff');
+                root.style.setProperty('--bg-input', '#f1f5f9');
+                root.style.setProperty('--text-primary', '#1e293b');
+                root.style.setProperty('--text-secondary', '#475569');
+                root.style.setProperty('--text-muted', '#94a3b8');
+                root.style.setProperty('--border', '#e2e8f0');
+                root.style.setProperty('--shadow', '0 4px 20px rgba(0,0,0,0.08)');
+                root.style.setProperty('--info-bg', '#eff6ff');
+                root.style.setProperty('--warning-bg', '#fffbeb');
+                root.style.setProperty('--tip-bg', '#f0fdf4');
+                root.style.setProperty('--note-bg', '#eef2ff');
+                btn.textContent = '🌙 Escuro';
+            }
+        }
+
+        // ===== CHECKLIST =====
+        function toggleCheck(element) {
+            element.classList.toggle('checked');
+            
+            // Guardar estado
+            const module = element.closest('.checklist').dataset.module;
+            const index = Array.from(element.parentNode.children).indexOf(element);
+            const key = module + '-' + index;
+            checklistState[key] = element.classList.contains('checked');
+            
+            saveState();
+            updateProgress();
+        }
+
+        function restoreChecklist() {
+            document.querySelectorAll('.checklist').forEach(list => {
+                const module = list.dataset.module;
+                Array.from(list.children).forEach((item, index) => {
+                    const key = module + '-' + index;
+                    if (checklistState[key]) {
+                        item.classList.add('checked');
+                    }
+                });
+            });
+        }
+
+        // ===== PROGRESSO =====
+        function updateProgress() {
+            const allItems = document.querySelectorAll('.checklist-item');
+            const checkedItems = document.querySelectorAll('.checklist-item.checked');
+            const total = allItems.length;
+            const done = checkedItems.length;
+            const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            
+            if (progressFill) {
+                progressFill.style.width = percent + '%';
+            }
+            if (progressText) {
+                progressText.textContent = percent + '% concluído (' + done + '/' + total + ' tarefas)';
+            }
+        }
+
+        // ===== ACCORDION =====
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const isOpen = item.classList.contains('open');
+            
+            // Fechar todos no mesmo card
+            item.parentElement.querySelectorAll('.accordion-item').forEach(ai => {
+                ai.classList.remove('open');
+            });
+            
+            if (!isOpen) {
+                item.classList.add('open');
+            }
+        }
+
+        // ===== QUIZ =====
+        function renderQuiz() {
+            const container = document.getElementById('quiz-questions');
+            if (!container) return;
+
+            let html = '';
+            quizData.forEach((item, qi) => {
+                html += '<div class="card quiz-question" data-qi="' + qi + '">';
+                html += '<h4 style="margin-bottom:12px; color:var(--text-primary);">' + item.q + '</h4>';
+                item.options.forEach((opt, oi) => {
+                    const isChecked = quizAnswers[qi] === oi ? 'checked' : '';
+                    const disabled = quizSubmitted ? 'disabled' : '';
+                    html += '<label style="display:flex; align-items:center; gap:10px; padding:10px 12px; margin:4px 0; border-radius:8px; cursor:pointer; transition:background 0.2s;" ';
+                    html += 'onmouseover="this.style.background=\'var(--bg-input)\'" onmouseout="this.style.background=\'transparent\'">';
+                    html += '<input type="radio" name="q' + qi + '" value="' + oi + '" ' + isChecked + ' ' + disabled + ' ';
+                    html += 'onchange="selectQuizAnswer(' + qi + ',' + oi + ')" style="accent-color:var(--accent);">';
+                    html += '<span style="color:var(--text-secondary);">' + opt + '</span>';
+                    html += '</label>';
+                });
+                html += '</div>';
+            });
+            container.innerHTML = html;
+
+            if (quizSubmitted) {
+                showQuizResults();
+            }
+        }
+
+        function selectQuizAnswer(qi, oi) {
+            quizAnswers[qi] = oi;
+            saveState();
+        }
+
+        function submitQuiz() {
+            // Verificar se todas as perguntas foram respondidas
+            const unanswered = quizData.filter((_, i) => quizAnswers[i] === undefined);
+            if (unanswered.length > 0) {
+                alert('⚠️ Responde a todas as ' + quizData.length + ' perguntas antes de submeter! Faltam ' + unanswered.length + ' respostas.');
+                return;
+            }
+
+            quizSubmitted = true;
+            saveState();
+            showQuizResults();
+            renderQuiz(); // Re-render para desativar inputs
+        }
+
+        function showQuizResults() {
+            let correct = 0;
+            quizData.forEach((item, i) => {
+                const questionEl = document.querySelector('.quiz-question[data-qi="' + i + '"]');
+                if (!questionEl) return;
+
+                const labels = questionEl.querySelectorAll('label');
+                labels.forEach((label, li) => {
+                    label.style.borderLeft = '3px solid transparent';
+                    label.style.paddingLeft = '12px';
+                    if (li === item.correct) {
+                        label.style.borderLeftColor = '#22c55e';
+                        label.style.background = 'rgba(34,197,94,0.1)';
+                    }
+                    if (quizAnswers[i] === li && li !== item.correct) {
+                        label.style.borderLeftColor = '#ef4444';
+                        label.style.background = 'rgba(239,68,68,0.1)';
+                    }
+                });
+
+                if (quizAnswers[i] === item.correct) correct++;
+            });
+
+            const percent = Math.round((correct / quizData.length) * 100);
+            let emoji, message;
+            if (percent >= 90) { emoji = '🏆'; message = 'Excelente! Dominas o Power BI!'; }
+            else if (percent >= 70) { emoji = '🎉'; message = 'Muito bom! Estás no bom caminho.'; }
+            else if (percent >= 50) { emoji = '💪'; message = 'Razoável. Revê os módulos onde erraste.'; }
+            else { emoji = '📚'; message = 'Precisa de mais estudo. Revê os módulos com calma.'; }
+
+            const resultEl = document.getElementById('quiz-result');
+            resultEl.style.display = 'block';
+            resultEl.innerHTML = '<div class="card" style="text-align:center; padding:30px;">' +
+                '<div style="font-size:48px; margin-bottom:12px;">' + emoji + '</div>' +
+                '<h3 style="color:var(--text-primary);">' + correct + ' / ' + quizData.length + ' corretas (' + percent + '%)</h3>' +
+                '<p style="color:var(--text-secondary); margin-top:8px;">' + message + '</p>' +
+                '</div>';
+
+            document.getElementById('quiz-submit-btn').style.display = 'none';
+            document.getElementById('quiz-retry-btn').style.display = 'inline-flex';
+        }
+
+        function retryQuiz() {
+            quizAnswers = {};
+            quizSubmitted = false;
+            document.getElementById('quiz-result').style.display = 'none';
+            document.getElementById('quiz-submit-btn').style.display = 'inline-flex';
+            document.getElementById('quiz-retry-btn').style.display = 'none';
+            saveState();
+            renderQuiz();
+        }
+
+        // ===== GLOSSÁRIO =====
+        function filterGlossary(value) {
+            const items = document.querySelectorAll('.glossary-item');
+            const search = value.toLowerCase().trim();
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(search) ? 'block' : 'none';
+            });
+        }
+
+        // ===== NOTAS =====
+        function saveNotes() {
+            const notes = document.getElementById('personal-notes');
+            if (notes) {
+                localStorage.setItem('pbi-guide-notes', notes.value);
+            }
+        }
+
+        function loadNotes() {
+            const notes = document.getElementById('personal-notes');
+            const saved = localStorage.getItem('pbi-guide-notes');
+            if (notes && saved) {
+                notes.value = saved;
+            }
+        }
+
+        function exportNotes() {
+            const notes = document.getElementById('personal-notes');
+            if (!notes || !notes.value.trim()) {
+                alert('⚠️ Não há notas para exportar.');
+                return;
+            }
+            const blob = new Blob([notes.value], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Notas_Power_BI_' + new Date().toISOString().slice(0, 10) + '.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function clearNotes() {
+            if (confirm('⚠️ Tens a certeza que queres apagar todas as notas?')) {
+                const notes = document.getElementById('personal-notes');
+                if (notes) notes.value = '';
+                localStorage.removeItem('pbi-guide-notes');
+            }
+        }
+
+        // ===== PERSISTÊNCIA (localStorage) =====
+        function saveState() {
+            const state = {
+                currentPage: currentPage,
+                isDarkMode: isDarkMode,
+                checklistState: checklistState,
+                quizAnswers: quizAnswers,
+                quizSubmitted: quizSubmitted
+            };
+            localStorage.setItem('pbi-guide-state', JSON.stringify(state));
+        }
+
+        function loadState() {
+            try {
+                const saved = localStorage.getItem('pbi-guide-state');
+                if (saved) {
+                    const state = JSON.parse(saved);
+                    currentPage = state.currentPage || 'inicio';
+                    isDarkMode = state.isDarkMode || false;
+                    checklistState = state.checklistState || {};
+                    quizAnswers = state.quizAnswers || {};
+                    quizSubmitted = state.quizSubmitted || false;
+                    restoreChecklist();
+                }
+            } catch (e) {
+                console.warn('Erro ao carregar estado:', e);
+            }
+        }
+
+        // ===== RESET TOTAL =====
+        function resetAll() {
+            if (confirm('⚠️ Isto vai apagar TODO o teu progresso, respostas do quiz e notas. Continuar?')) {
+                localStorage.removeItem('pbi-guide-state');
+                localStorage.removeItem('pbi-guide-notes');
+                location.reload();
+            }
+        }
+
+        // ===== FECHAR SIDEBAR AO CLICAR FORA (MOBILE) =====
+        document.addEventListener('click', function(e) {
+            const sidebar = document.querySelector('.sidebar');
+            const hamburger = document.querySelector('.hamburger');
+            if (sidebar.classList.contains('open') && 
+                !sidebar.contains(e.target) && 
+                !hamburger.contains(e.target)) {
+                sidebar.classList.remove('open');
+            }
+        });
+
+        // ===== ATALHOS DE TECLADO =====
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+D = toggle dark mode
+            if (e.ctrlKey && e.key === 'd') {
+                e.preventDefault();
+                toggleTheme();
+            }
+        });
+    </script>
+</body>
+</html>
